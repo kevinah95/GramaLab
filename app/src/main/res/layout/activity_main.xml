@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.android.gramalab.MainActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg_inicio" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center_horizontal|center_vertical"
+
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/btn_jugar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="#00000000"
+            android:onClick="onClick"
+            android:scaleType="centerInside"
+            android:src="@drawable/btn_jugar" />
+
+        <ImageButton
+            android:id="@+id/btn_opciones"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btn_jugar"
+            android:layout_centerHorizontal="true"
+            android:background="#00000000"
+            android:onClick="onClick"
+            android:scaleType="centerInside"
+            android:src="@drawable/btn_opciones" />
+
+        <ImageButton
+            android:id="@+id/btn_salir"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btn_opciones"
+            android:layout_centerHorizontal="true"
+            android:background="#00000000"
+            android:onClick="onClick"
+            android:scaleType="centerInside"
+            android:src="@drawable/btn_salir" />
+    </RelativeLayout>
+
+
+</FrameLayout>
