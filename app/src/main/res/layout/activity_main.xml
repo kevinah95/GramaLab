@@ -16,9 +16,37 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
-        android:layout_gravity="center_horizontal|center_vertical"
+        android:layout_gravity="center_horizontal|bottom"
 
         android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/pointImg"
+            android:src="@drawable/punto"
+            android:layout_alignParentBottom="true"
+            android:layout_toLeftOf="@+id/accentImg"
+            android:layout_toStartOf="@+id/accentImg"
+            android:layout_marginBottom="16dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/accentImg"
+            android:src="@drawable/tilde"
+            android:layout_above="@+id/pointImg"
+            android:layout_toLeftOf="@+id/commaImg"
+            android:layout_toStartOf="@+id/commaImg" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/commaImg"
+            android:src="@drawable/coma"
+            android:layout_below="@+id/accentImg"
+            android:layout_toRightOf="@+id/btn_salir"
+            android:layout_toEndOf="@+id/btn_salir" />
 
         <ImageButton
             android:id="@+id/btn_jugar"
@@ -29,6 +57,7 @@
             android:background="#00000000"
             android:onClick="onClick"
             android:scaleType="centerInside"
+            android:visibility="invisible"
             android:src="@drawable/btn_jugar" />
 
         <ImageButton
@@ -40,6 +69,7 @@
             android:background="#00000000"
             android:onClick="onClick"
             android:scaleType="centerInside"
+            android:visibility="invisible"
             android:src="@drawable/btn_opciones" />
 
         <ImageButton
@@ -51,7 +81,9 @@
             android:background="#00000000"
             android:onClick="onClick"
             android:scaleType="centerInside"
+            android:visibility="invisible"
             android:src="@drawable/btn_salir" />
+
     </RelativeLayout>
 
 
