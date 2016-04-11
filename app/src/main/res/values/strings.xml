@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">GramaLab</string>
+    <string name="title_activity_complete">CompleteActivity</string>
 </resources>

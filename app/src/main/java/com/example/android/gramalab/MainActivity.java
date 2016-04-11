@@ -1,5 +1,7 @@
 package com.example.android.gramalab;
 
+import android.content.Context;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
@@ -30,10 +32,15 @@ public class MainActivity extends AppCompatActivity {
     private PetsView petsViewAccent;
     private PetsView petsViewComma;
 
+    Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        context = this;
+
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         animBtn = AnimationUtils.loadAnimation(this, R.anim.btn_scale);
 
@@ -82,6 +89,8 @@ public class MainActivity extends AppCompatActivity {
             public void onFinish() {
                 switch (v.getId()) {
                     case R.id.btn_jugar:
+                        Intent intent = new Intent(context, CompleteGameActivity.class);
+                        startActivity(intent);
                         break;
                     case R.id.btn_opciones:
                         break;
