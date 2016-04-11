@@ -1,4 +1,4 @@
-package com.example.android.gramalab;
+package com.example.android.gramalab.Classes;
 
 /**
  * Created by Farcem on 10-Apr-16.

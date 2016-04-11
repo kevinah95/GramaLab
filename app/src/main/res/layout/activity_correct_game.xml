@@ -12,7 +12,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="¡Completa la oración!"
+        android:text="¡Corrige la oración!"
         android:id="@+id/title"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
@@ -27,55 +27,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Numero de fallos: 0"
-        android:id="@+id/triesTextViewComplete"
+        android:id="@+id/triesTextViewCorrect"
         android:textAlignment="center"
         android:textSize="25dp"
         android:layout_below="@+id/title"
         android:layout_centerHorizontal="true"
         android:paddingTop="25dp" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/sentenceEditTextComplete"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/title"
-        android:layout_alignEnd="@+id/title"
-        android:text="Rodrigo [Verbo] todo el día."
-        android:textAlignment="center"
-        android:enabled="false" />
-
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/gridLayout"
-        android:layout_below="@+id/sentenceEditTextComplete"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Verbo: Correr"
-            android:id="@+id/wordTextViewComplete"
-            android:layout_row="0"
-            android:layout_column="0"
-            android:textAlignment="center"
-            android:textSize="20dp"
-            android:paddingTop="25dp" />
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true">
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/answerEditTextComplete"
+            android:id="@+id/answerEditTextCorrect"
             android:layout_row="1"
             android:layout_column="0"
             android:editable="true"
-            android:hint="Respuesta"
             android:textAlignment="center"
-            android:paddingTop="30dp" />
+            android:paddingTop="30dp"
+            android:text="Oración" />
 
     </GridLayout>
 
@@ -83,7 +59,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Revisar"
-        android:id="@+id/checkButtonComplete"
+        android:id="@+id/checkButtonCorrect"
         android:layout_row="1"
         android:layout_column="1"
         android:layout_below="@+id/gridLayout"

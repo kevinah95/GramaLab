@@ -2,12 +2,12 @@ package com.example.android.gramalab;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Editable;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.android.gramalab.Classes.CompleteGame;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -38,10 +38,10 @@ public class CompleteGameActivity extends AppCompatActivity
         completeGames.add(new CompleteGame("Tienen que [Verbo] mucho para este examen","Verbo: Estudiar","estudiar"));
         //Aqui termina el ciclo
 
-        sentenceEditText = (EditText)findViewById(R.id.sentenceEditText);
-        wordTextView = (TextView)findViewById(R.id.wordTextView);
-        answerEditText = (EditText)findViewById(R.id.answerEditText);
-        triesTextView = (TextView)findViewById(R.id.triesTextView);
+        sentenceEditText = (EditText)findViewById(R.id.sentenceEditTextComplete);
+        wordTextView = (TextView)findViewById(R.id.wordTextViewComplete);
+        answerEditText = (EditText)findViewById(R.id.answerEditTextComplete);
+        triesTextView = (TextView)findViewById(R.id.triesTextViewComplete);
 
         sentenceEditText.setKeyListener(null);
 
