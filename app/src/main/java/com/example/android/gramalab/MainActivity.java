@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
             public void onFinish() {
                 switch (v.getId()) {
                     case R.id.btn_jugar:
-                        Intent intent = new Intent(context, CorrectGameActivity.class);
+                        Intent intent = new Intent(context, DivideGameActivity.class);
                         startActivity(intent);
                         break;
                     case R.id.btn_opciones:
