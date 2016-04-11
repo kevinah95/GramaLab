@@ -22,10 +22,10 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" />
-
-        <activity android:name=".CompleteGameActivity"/>
-        <activity android:name=".CorrectGameActivity"/>
-        <activity android:name=".DivideGameActivity"/>
+        <activity android:name=".CompleteGameActivity" />
+        <activity android:name=".CorrectGameActivity" />
+        <activity android:name=".DivideGameActivity" />
+        <activity android:name=".OrderGameActivity"></activity>
     </application>
 
 </manifest>
