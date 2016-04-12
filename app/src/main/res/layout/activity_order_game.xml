@@ -42,34 +42,53 @@
         android:layout_row="1"
         android:layout_column="1"
         android:onClick="checkAnswer"
-        android:layout_below="@+id/answerEditTextOrder"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="57dp" />
+        android:layout_marginBottom="77dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/sentenceEditTextOrder"
-        android:layout_below="@+id/triesTextViewOrder"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:id="@+id/horizontalScrollView"
+        android:fillViewport="false"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/checkButtonOrder"
+            android:orientation="horizontal"
+            android:id="@+id/gridViewSentence"
+            android:layout_toLeftOf="@+id/checkButtonOrder"
+            android:layout_toStartOf="@+id/checkButtonOrder"></GridLayout>
+    </HorizontalScrollView>
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:id="@+id/horizontalScrollView2"
+        android:fillViewport="false"
+        android:layout_below="@+id/horizontalScrollView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:paddingTop="40dp"
-        android:textAlignment="center"
-        android:text="Oración" />
+        android:layout_marginTop="52dp">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/answerEditTextOrder"
-        android:layout_below="@+id/sentenceEditTextOrder"
-        android:layout_alignRight="@+id/sentenceEditTextOrder"
-        android:layout_alignEnd="@+id/sentenceEditTextOrder"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:paddingTop="40dp"
-        android:textAlignment="center"
-        android:hint="Respuesta" />
+        <GridLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/checkButtonOrder"
+            android:orientation="horizontal"
+            android:id="@+id/gridViewAnswer"
+            android:layout_toLeftOf="@+id/checkButtonOrder"
+            android:layout_toStartOf="@+id/checkButtonOrder" />
+    </HorizontalScrollView>
 
 </RelativeLayout>

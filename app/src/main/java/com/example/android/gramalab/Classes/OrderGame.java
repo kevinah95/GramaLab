@@ -15,10 +15,17 @@ public class OrderGame
     public OrderGame(String _CorrectSentece)
     {
         this._Words = new ArrayList<>(Arrays.asList(_CorrectSentece.split(" ")));
+        Collections.shuffle(this._Words);
         this._CorrectSentece = _CorrectSentece;
     }
 
-    public String get_Words()
+
+    public ArrayList<String> get_Words()
+    {
+        return _Words;
+    }
+
+    public String get_ShuffleWords()
     {
         String shuffleSentence = "";
         Collections.shuffle(this._Words);

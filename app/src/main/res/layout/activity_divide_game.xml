@@ -37,7 +37,7 @@
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/gridLayout"
+        android:id="@+id/gridViewSentence"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true">
@@ -62,7 +62,7 @@
         android:id="@+id/checkButtonDivide"
         android:layout_row="1"
         android:layout_column="1"
-        android:layout_below="@+id/gridLayout"
+        android:layout_below="@+id/gridViewSentence"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="47dp"
         android:onClick="checkAnswer" />
