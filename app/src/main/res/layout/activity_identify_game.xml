@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.android.gramalab.CompleteGameActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="¡Identifica las palabras!"
+        android:id="@+id/title"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="109dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:textAlignment="center"
+        android:textSize="30dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Numero de fallos: 0"
+        android:id="@+id/triesTextViewIdentify"
+        android:textAlignment="center"
+        android:textSize="25dp"
+        android:layout_below="@+id/title"
+        android:layout_centerHorizontal="true"
+        android:paddingTop="25dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/wordEditTextIdentity"
+        android:paddingTop="30dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/title"
+        android:layout_alignEnd="@+id/title" />
+
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:rowCount="2"
+        android:columnCount="3"
+        android:paddingTop="30dp"
+        android:layout_below="@+id/wordEditTextIdentity"
+        android:layout_alignRight="@+id/triesTextViewIdentify"
+        android:layout_alignEnd="@+id/triesTextViewIdentify">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Verbo"
+            android:id="@+id/buttonVerb"
+            android:layout_row="0"
+            android:layout_column="0" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Adjetivo"
+            android:id="@+id/buttonAdjective"
+            android:layout_row="1"
+            android:layout_column="0" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sustantivo"
+            android:id="@+id/buttonNoun"
+            android:layout_row="0"
+            android:layout_column="1" />
+
+        <Button
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:text="Articulo"
+            android:id="@+id/buttonArticle"
+            android:layout_row="1"
+            android:layout_column="1" />
+
+    </GridLayout>
+
+</RelativeLayout>

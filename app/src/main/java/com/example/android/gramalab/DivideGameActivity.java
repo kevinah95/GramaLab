@@ -63,7 +63,7 @@ public class DivideGameActivity extends AppCompatActivity
             }
             else
             {
-                Toast.makeText(this, "Respuesta incorrecta" + actualGame.get_DividedWord(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Respuesta incorrecta", Toast.LENGTH_SHORT).show();
                 triesTextView.setText("Número de fallos: " + ++tries);
             }
         }

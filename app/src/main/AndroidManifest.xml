@@ -25,7 +25,8 @@
         <activity android:name=".CompleteGameActivity" />
         <activity android:name=".CorrectGameActivity" />
         <activity android:name=".DivideGameActivity" />
-        <activity android:name=".OrderGameActivity"></activity>
+        <activity android:name=".OrderGameActivity" />
+        <activity android:name=".IdentifyGameActivity"></activity>
     </application>
 
 </manifest>
