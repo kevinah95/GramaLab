@@ -1,0 +1,75 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomeFragment">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg_home" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal|bottom"
+        android:orientation="vertical">
+
+        <com.example.android.gramalab.PetsView
+            android:id="@+id/petsViewPoint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/point"/>
+
+        <com.example.android.gramalab.PetsView
+            android:id="@+id/petsViewAccent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/accent"/>
+
+        <com.example.android.gramalab.PetsView
+            android:id="@+id/petsViewComma"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/comma"/>
+
+        <ImageButton
+            android:id="@+id/btn_play"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="#00000000"
+            android:scaleType="centerInside"
+            android:visibility="invisible"
+            android:layout_marginBottom="5dp"
+            android:src="@drawable/btn_play" />
+
+        <ImageButton
+            android:id="@+id/btn_options"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btn_play"
+            android:layout_centerHorizontal="true"
+            android:background="#00000000"
+            android:scaleType="centerInside"
+            android:visibility="invisible"
+            android:layout_marginBottom="5dp"
+            android:src="@drawable/btn_options" />
+
+        <ImageButton
+            android:id="@+id/btn_exit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btn_options"
+            android:layout_centerHorizontal="true"
+            android:background="#00000000"
+            android:scaleType="centerInside"
+            android:visibility="invisible"
+            android:src="@drawable/btn_exit" />
+
+    </RelativeLayout>
+
+
+</FrameLayout>
