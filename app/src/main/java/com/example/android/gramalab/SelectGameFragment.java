@@ -29,6 +29,10 @@ public class SelectGameFragment extends Fragment implements View.OnClickListener
     private View view;
     private Animation animBtn;
 
+    ButtonAnimation buttonsAnimation;
+
+    private static SelectGameFragment instance = null;
+
     private ViewPager customViewPager;
 
     private ImageButton btnSelectGameComplete;
@@ -41,6 +45,22 @@ public class SelectGameFragment extends Fragment implements View.OnClickListener
         // Required empty public constructor
     }
 
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser)
+            if(btnSelectGameComplete != null && btnSelectGameCorrect != null
+                    && btnSelectGameFractionate != null && btnSelectGameIdentify != null
+                    && btnSelectGameOrder != null && instance == null) {
+                instance = this;
+                buttonsAnimation.showAnimation(btnSelectGameComplete, buttonsAnimation.animTranslateYInverted);
+                buttonsAnimation.showAnimation(btnSelectGameIdentify, buttonsAnimation.animTranslate);
+                buttonsAnimation.showAnimation(btnSelectGameOrder, buttonsAnimation.animTranslateInverted);
+                buttonsAnimation.showAnimation(btnSelectGameFractionate, buttonsAnimation.animTranslate);
+                buttonsAnimation.showAnimation(btnSelectGameCorrect, buttonsAnimation.animTranslateY);
+            }
+        Log.d("MyFragment", "Fragment is visible.");
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,6 +69,8 @@ public class SelectGameFragment extends Fragment implements View.OnClickListener
         view = inflater.inflate(R.layout.fragment_select_game, container, false);
 
         animBtn = AnimationUtils.loadAnimation(getActivity(), R.anim.btn_scale);
+
+        buttonsAnimation = new ButtonAnimation(getActivity()) {};
 
         customViewPager = (ViewPager) getActivity().findViewById(R.id.custom_view_pager);
 

@@ -30,15 +30,30 @@ public class SelectLevelFragment extends Fragment implements View.OnClickListene
     private Animation animBtn;
     private ViewPager customViewPager;
 
+    ButtonAnimation buttonsAnimation;
+
     private ImageButton btnSelectLevelFirstCycle;
     private ImageButton btnSelectLevelSecondCycle;
 
     private static final int POSITION_SELECT_GAME_FRAGMENT = 2;
 
+    private static SelectLevelFragment instance = null;
+
     public SelectLevelFragment() {
         // Required empty public constructor
     }
 
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser)
+            if(btnSelectLevelFirstCycle != null && btnSelectLevelSecondCycle != null && instance == null) {
+                instance = this;
+                buttonsAnimation.showAnimation(btnSelectLevelFirstCycle, buttonsAnimation.animTranslate);
+                buttonsAnimation.showAnimation(btnSelectLevelSecondCycle, buttonsAnimation.animTranslateInverted);
+            }
+            Log.d("MyFragment", "Fragment is visible.");
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,6 +61,8 @@ public class SelectLevelFragment extends Fragment implements View.OnClickListene
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_select_level, container, false);
         animBtn = AnimationUtils.loadAnimation(getActivity(), R.anim.btn_scale);
+
+        buttonsAnimation = new ButtonAnimation(getActivity()) {};
 
         customViewPager = (ViewPager) getActivity().findViewById(R.id.custom_view_pager);
 
@@ -105,6 +122,7 @@ public class SelectLevelFragment extends Fragment implements View.OnClickListene
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
+
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
