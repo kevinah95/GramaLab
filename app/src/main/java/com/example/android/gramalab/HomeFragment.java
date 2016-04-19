@@ -43,6 +43,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
     private static final int POSITION_SELECT_LEVEL_FRAGMENT = 1;
 
+    private static HomeFragment instance = null;
+
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -65,9 +67,18 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         animTranslateInverted = AnimationUtils.loadAnimation(getActivity(), R.anim.anim_translate_reverse);
         animTranslateY = AnimationUtils.loadAnimation(getActivity(), R.anim.anim_translate_y);
 
-        showAnimation(homeButton, animTranslate);
-        showAnimation(optionsButton, animTranslateInverted);
-        showAnimation(exitButton, animTranslateY);
+        if(instance == null) {
+            instance = this;
+            showAnimation(homeButton, animTranslate);
+            showAnimation(optionsButton, animTranslateInverted);
+            showAnimation(exitButton, animTranslateY);
+        }
+        else {
+            homeButton.setVisibility(View.VISIBLE);
+            optionsButton.setVisibility(View.VISIBLE);
+            exitButton.setVisibility(View.VISIBLE);
+        }
+
 
         // Solution -> http://stackoverflow.com/a/12153121/4752488
         customViewPager = (ViewPager) getActivity().findViewById(R.id.custom_view_pager);
