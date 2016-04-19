@@ -1,6 +1,7 @@
 package com.example.android.gramalab;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -13,6 +14,8 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
+
+import games_Activities.CompleteGameActivity;
 
 
 /**
@@ -59,7 +62,6 @@ public class SelectGameFragment extends Fragment implements View.OnClickListener
                 buttonsAnimation.showAnimation(btnSelectGameFractionate, buttonsAnimation.animTranslate);
                 buttonsAnimation.showAnimation(btnSelectGameCorrect, buttonsAnimation.animTranslateY);
             }
-        Log.d("MyFragment", "Fragment is visible.");
     }
 
     @Override
@@ -85,6 +87,14 @@ public class SelectGameFragment extends Fragment implements View.OnClickListener
         btnSelectGameFractionate.setOnClickListener(this);
         btnSelectGameIdentify.setOnClickListener(this);
         btnSelectGameOrder.setOnClickListener(this);
+
+        if(instance != null) {
+            btnSelectGameComplete.setVisibility(View.VISIBLE);
+            btnSelectGameCorrect.setVisibility(View.VISIBLE);
+            btnSelectGameFractionate.setVisibility(View.VISIBLE);
+            btnSelectGameIdentify.setVisibility(View.VISIBLE);
+            btnSelectGameOrder.setVisibility(View.VISIBLE);
+        }
 
         return view;
     }
@@ -120,7 +130,8 @@ public class SelectGameFragment extends Fragment implements View.OnClickListener
             public void onFinish() {
                 switch (v.getId()) {
                     case R.id.btn_select_game_complete:
-                        // TODO: Make useful
+                        Intent intent = new Intent(getContext(), CompleteGameActivity.class);
+                        startActivity(intent);
                         Log.d(TAG, "TODO");
                         break;
                     case R.id.btn_select_game_correct:
