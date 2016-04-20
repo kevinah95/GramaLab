@@ -1,4 +1,4 @@
-package com.example.android.gramalab;
+package com.example.android.gramalab.views;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

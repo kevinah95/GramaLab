@@ -1,4 +1,4 @@
-package Utils;
+package com.example.android.gramalab.utils;
 
 /**
  * Created by jasc9 on 3/4/2016.

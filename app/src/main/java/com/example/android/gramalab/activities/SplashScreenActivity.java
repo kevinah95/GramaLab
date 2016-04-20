@@ -1,4 +1,4 @@
-package com.example.android.gramalab;
+package com.example.android.gramalab.activities;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -9,6 +9,8 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+
+import com.example.android.gramalab.R;
 
 /**
  * Created by jasc9 on 14/3/2016.

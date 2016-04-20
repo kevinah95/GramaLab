@@ -1,4 +1,4 @@
-package com.example.android.gramalab;
+package com.example.android.gramalab.views;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -7,7 +7,7 @@ import android.support.graphics.drawable.VectorDrawableCompat;
 import android.util.AttributeSet;
 import android.view.View;
 
-import Utils.GraphicsUtils;
+import com.example.android.gramalab.utils.GraphicsUtils;
 
 /**
  * Created by jasc9 on 3/4/2016.

@@ -1,4 +1,4 @@
-package games.logic;
+package com.example.android.gramalab.logic;
 
 /**
  * Created by Farcem on 10-Apr-16.

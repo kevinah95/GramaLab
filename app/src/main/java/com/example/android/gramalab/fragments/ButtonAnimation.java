@@ -1,4 +1,4 @@
-package com.example.android.gramalab;
+package com.example.android.gramalab.fragments;
 
 import android.content.Context;
 import android.os.CountDownTimer;
@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
+
+import com.example.android.gramalab.R;
 
 /**
  * Created by jasc9 on 19/4/2016.

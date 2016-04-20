@@ -6,81 +6,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.android.gramalab.MainActivity">
+    tools:context=".activities.MainActivity">
 
-    <!--<ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/bg_inicio" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center_horizontal|bottom"
-        android:orientation="vertical">
-
-        <com.example.android.gramalab.PetsView
-            android:id="@+id/petsViewPoint"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/point"/>
-
-        <com.example.android.gramalab.PetsView
-            android:id="@+id/petsViewAccent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/accent"/>
-
-        <com.example.android.gramalab.PetsView
-            android:id="@+id/petsViewComma"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/comma"/>
-
-        <ImageButton
-            android:id="@+id/btn_jugar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:background="#00000000"
-            android:onClick="onClick"
-            android:scaleType="centerInside"
-            android:visibility="invisible"
-            android:src="@drawable/btn_jugar" />
-
-        <ImageButton
-            android:id="@+id/btn_opciones"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/btn_jugar"
-            android:layout_centerHorizontal="true"
-            android:background="#00000000"
-            android:onClick="onClick"
-            android:scaleType="centerInside"
-            android:visibility="invisible"
-            android:src="@drawable/btn_opciones" />
-
-        <ImageButton
-            android:id="@+id/btn_salir"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/btn_opciones"
-            android:layout_centerHorizontal="true"
-            android:background="#00000000"
-            android:onClick="onClick"
-            android:scaleType="centerInside"
-            android:visibility="invisible"
-            android:src="@drawable/btn_salir" />
-
-    </RelativeLayout>-->
-    <!-- Prueba Parallax-->
-    <com.example.android.gramalab.CustomViewPager
+    <!-- Test Parallax-->
+    <com.example.android.gramalab.views.CustomViewPager
         android:id="@+id/custom_view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </com.example.android.gramalab.CustomViewPager>
+    </com.example.android.gramalab.views.CustomViewPager>
 
 </FrameLayout>

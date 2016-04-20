@@ -1,4 +1,4 @@
-package com.example.android.gramalab;
+package com.example.android.gramalab.activities;
 
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -11,6 +11,13 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 
+import com.example.android.gramalab.views.CustomPagerAdapter;
+import com.example.android.gramalab.views.CustomViewPager;
+import com.example.android.gramalab.fragments.HomeFragment;
+import com.example.android.gramalab.R;
+import com.example.android.gramalab.fragments.SelectGameFragment;
+import com.example.android.gramalab.fragments.SelectLevelFragment;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
@@ -19,7 +26,8 @@ import java.util.Stack;
 public class MainActivity extends AppCompatActivity implements
         HomeFragment.OnFragmentInteractionListener,
         SelectLevelFragment.OnFragmentInteractionListener,
-        SelectGameFragment.OnFragmentInteractionListener {
+        SelectGameFragment.OnFragmentInteractionListener
+        {
 
     public static final String TAG = MainActivity.class.getName();
 
@@ -35,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //Activity FullScreen
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         startMusic();
         //--------------------------Prueba Parallax
@@ -75,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     /**
-     * Cambia el modo de pantalla a IMMERSIVE http://developer.android.com/intl/es/training/system-ui/immersive.html
+     * Change Screen Mode: IMMERSIVE http://developer.android.com/intl/es/training/system-ui/immersive.html
      *
      * @param hasFocus
      */

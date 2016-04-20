@@ -1,4 +1,5 @@
-package com.example.android.gramalab;
+package com.example.android.gramalab.fragments;
+
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,7 +16,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 
-import games.activities.CompleteGameActivity;
+import com.example.android.gramalab.R;
+import com.example.android.gramalab.activities.games.CompleteGameActivity;
 
 
 /**

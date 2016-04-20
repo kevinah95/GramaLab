@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeFragment">
+    tools:context=".fragments.HomeFragment">
 
     <ImageView
         android:layout_width="match_parent"
@@ -16,19 +16,19 @@
         android:layout_gravity="center_horizontal|bottom"
         android:orientation="vertical">
 
-        <com.example.android.gramalab.PetsView
+        <com.example.android.gramalab.views.PetsView
             android:id="@+id/petsViewPoint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/point"/>
 
-        <com.example.android.gramalab.PetsView
+        <com.example.android.gramalab.views.PetsView
             android:id="@+id/petsViewAccent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/accent"/>
 
-        <com.example.android.gramalab.PetsView
+        <com.example.android.gramalab.views.PetsView
             android:id="@+id/petsViewComma"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

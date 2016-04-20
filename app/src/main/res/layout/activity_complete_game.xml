@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.android.gramalab.CompleteGameActivity">
+    tools:context="com.example.android.gramalab.activities.games.CompleteGameActivity">
 
     <TextView
         android:layout_width="wrap_content"
@@ -89,6 +89,6 @@
         android:layout_below="@+id/gridViewSentence"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="47dp"
-        android:onClick="checkAnswer" />
+         />
 
 </RelativeLayout>
