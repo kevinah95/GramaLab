@@ -15,7 +15,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 
-import games_Activities.CompleteGameActivity;
+import games.activities.CompleteGameActivity;
 
 
 /**

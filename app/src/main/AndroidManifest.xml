@@ -21,7 +21,7 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" />
-        <activity android:name="games_Activities.CompleteGameActivity" />
+        <activity android:name="games.activities.CompleteGameActivity" />
     </application>
 
 </manifest>
