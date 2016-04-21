@@ -1,15 +1,18 @@
 package com.example.android.gramalab.activities.games;
 
-import android.graphics.PixelFormat;
+
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.SurfaceHolder;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AbsoluteLayout;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,6 +31,9 @@ public class CompleteGameActivity extends AppCompatActivity
 {
     ArrayList<CompleteGame> completeGames = new ArrayList<>();
     CompleteGame actualGame;
+
+    private Animation animBtn;
+    private ImageButton checkButton;
 
     DrawVectorView sentenceBox;
     DrawVectorView wordTextBox;
@@ -56,6 +62,8 @@ public class CompleteGameActivity extends AppCompatActivity
         setContentView(R.layout.activity_complete_game);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+        animBtn = AnimationUtils.loadAnimation(this, R.anim.btn_scale);
+
         /*
         Aqui haria como un ciclo donde agrega a completeGames lo que haya en la base de datos
         */
@@ -67,6 +75,9 @@ public class CompleteGameActivity extends AppCompatActivity
         //Cosas de Diseño
         //drawVector(sentenceBox, R.id.cloud_box, 0.945f, 0.85f, 0.90f, "Sentence");
         //drawVector(wordTextBox, R.id.tense_box, 0.60f, 0.53f, 0.50f, "Word");
+
+        checkButton = (ImageButton) findViewById(R.id.btn_check_answer);
+
         relativeLayout = (RelativeLayout) findViewById(R.id.rel_layout);
         absoluteLayout = (AbsoluteLayout) findViewById(R.id.abs_layout);
 
@@ -101,7 +112,7 @@ public class CompleteGameActivity extends AppCompatActivity
         //drawText(sentenceText, R.id.sentence_text, "Aquí va el texto", "Dosis-Regular.ttf", 80, 0.945f, 0.79f, true);
         //sentenceEditText = (EditText)findViewById(R.id.sentenceEditTextComplete);
         //wordTextView = (TextView)findViewById(R.id.wordTextViewComplete);
-        //answerEditText = (EditText)findViewById(R.id.answerEditTextComplete);
+        answerEditText = (EditText)findViewById(R.id.answer_edit_Text);
         //triesTextView = (TextView)findViewById(R.id.triesTextViewComplete);
 
         //sentenceEditText.setKeyListener(null);
@@ -118,11 +129,8 @@ public class CompleteGameActivity extends AppCompatActivity
         if (hasFocus) {
             getWindow().getDecorView().setSystemUiVisibility(
                     View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                             | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                            | View.SYSTEM_UI_FLAG_FULLSCREEN
-                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+                            | View.SYSTEM_UI_FLAG_FULLSCREEN);
         }
     }
 
@@ -130,7 +138,7 @@ public class CompleteGameActivity extends AppCompatActivity
     {
         CompleteGame completeGame = completeGames.get(new Random().nextInt(completeGames.size()));
         sentenceText = new DrawTextView(this);
-        sentenceText.setText(completeGame.get_Sentence(), "Dosis-Regular.ttf", 80, 0.945f, 0.65f, true, 80, sentenceBoxWidth, sentenceBoxMinWidth);
+        sentenceText.setText(completeGame.get_Sentence(), "Dosis-Regular.ttf", 80, 0.945f, 0.62f, true, 80, sentenceBoxWidth, sentenceBoxMinWidth);
         sentenceText.bringToFront();
 
         tenceText = new DrawTextView(this);
@@ -146,13 +154,13 @@ public class CompleteGameActivity extends AppCompatActivity
 
         //sentenceEditText.setText(completeGame.get_Sentence());
         //wordTextView.setText(completeGame.get_Word());
-        //answerEditText.setText("");
+        answerEditText.setText("");
         //tries = 0;
         //triesTextView.setText("Número de fallos: " + tries);
-        //actualGame = completeGame;
+        actualGame = completeGame;
     }
 
-    public void checkAnswer(View v)
+    public void checkAnswer()
     {
         if(answerEditText.getText().toString().matches(""))
             Toast.makeText(this, "Debes escribir una respuesta", Toast.LENGTH_SHORT).show();
@@ -165,21 +173,18 @@ public class CompleteGameActivity extends AppCompatActivity
             else
             {
                 Toast.makeText(this, "Respuesta incorrecta", Toast.LENGTH_SHORT).show();
-                triesTextView.setText("Número de fallos: " + ++tries);
+                //triesTextView.setText("Número de fallos: " + ++tries);
             }
         }
     }
 
-    private void drawVector(DrawVectorView pVector, int pIdView, float pWidthPorcent, float pHeightPorcent, float pScalePorcent, String pVariableName) {
-        pVector = (DrawVectorView) findViewById(pIdView);
-        pVector.setWIDTH_POSITON_PORCENTAGE(pWidthPorcent);
-        pVector.setHEIGHT_POSITON_PORCENTAGE(pHeightPorcent);
-        pVector.setVECTOR_SCALABLE_PORCENTAGE(pScalePorcent);
-    }
-
-    private void drawText(DrawTextView pTextObject, int pIdView, String pText, String pFont, float pSize, float pWidthPorcent, float pHeightPorcent, boolean pCenter, int pMargin, float pParentSize, float pParentInit) {
-        pTextObject = (DrawTextView) findViewById(pIdView);
-        pTextObject.setText(pText, pFont, pSize, pWidthPorcent, pHeightPorcent, pCenter, pMargin, pParentSize, pParentInit);
-        pTextObject.bringToFront();
+    public void onClick(final View v) {
+        v.startAnimation(animBtn);
+        new CountDownTimer(250, 1) {
+            public void onFinish() {
+                    checkAnswer();
+            }
+            public void onTick(long millisUntilFinished) {}
+        }.start();
     }
 }
