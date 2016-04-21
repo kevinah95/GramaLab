@@ -11,29 +11,58 @@
         android:scaleType="centerCrop"
         android:src="@drawable/bg_game_complete" />
 
-    <com.example.android.gramalab.views.games.DrawVectorView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/cloud_box"
-        android:src="@drawable/game_complete_cloud"
-    />
 
-    <com.example.android.gramalab.views.games.DrawVectorView
+    <AbsoluteLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/tense_box"
-        android:src="@drawable/game_complete_tense"
-        />
+        android:id="@+id/abs_layout"
+        android:visibility="visible">
+    </AbsoluteLayout>
 
-    <com.example.android.gramalab.views.games.DrawTextView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/sentence_text" />
+        android:id="@+id/rel_layout">
 
-    <com.example.android.gramalab.views.games.DrawTextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/tence_text" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/imageView"
+            android:src="@color/black"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="CARGANDO..."
+            android:id="@+id/loading_text"
+            android:layout_centerInParent="true"
+            android:textColor="#ffffff"
+            android:textSize="50dp" />
+    </RelativeLayout>
+    <!--<com.example.android.gramalab.views.games.DrawVectorView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:id="@+id/cloud_box"-->
+        <!--android:src="@drawable/game_complete_cloud"-->
+    <!--/>-->
+
+    <!--<com.example.android.gramalab.views.games.DrawVectorView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:id="@+id/tense_box"-->
+        <!--android:src="@drawable/game_complete_tense"-->
+        <!--/>-->
+
+    <!--<com.example.android.gramalab.views.games.DrawTextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:id="@+id/sentence_text" />-->
+
+    <!--<com.example.android.gramalab.views.games.DrawTextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:id="@+id/tence_text" />-->
 
     <!--<TextView-->
         <!--android:layout_width="wrap_content"-->

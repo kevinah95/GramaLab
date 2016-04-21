@@ -1,12 +1,16 @@
 package com.example.android.gramalab.activities.games;
 
 import android.graphics.PixelFormat;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.AbsoluteLayout;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +34,14 @@ public class CompleteGameActivity extends AppCompatActivity
     DrawTextView sentenceText;
     DrawTextView tenceText;
 
+    AbsoluteLayout absoluteLayout;
+    RelativeLayout relativeLayout;
+
+    private float sentenceBoxWidth;
+    private float sentenceBoxMinWidth;
+    private float wordTextBoxWidth;
+    private float wordTextBoxMinWidth;
+
     EditText sentenceEditText;
     TextView wordTextView;
     EditText answerEditText;
@@ -42,7 +54,6 @@ public class CompleteGameActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_complete_game);
-        // Activity Full Screen
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         /*
@@ -54,8 +65,39 @@ public class CompleteGameActivity extends AppCompatActivity
         //Aqui termina el ciclo
 
         //Cosas de Diseño
-        drawVector(sentenceBox, R.id.cloud_box, 0.945f, 0.85f, 0.90f);
-        drawVector(wordTextBox, R.id.tense_box, 0.60f, 0.53f, 0.50f);
+        //drawVector(sentenceBox, R.id.cloud_box, 0.945f, 0.85f, 0.90f, "Sentence");
+        //drawVector(wordTextBox, R.id.tense_box, 0.60f, 0.53f, 0.50f, "Word");
+        relativeLayout = (RelativeLayout) findViewById(R.id.rel_layout);
+        absoluteLayout = (AbsoluteLayout) findViewById(R.id.abs_layout);
+
+        sentenceBox = new DrawVectorView(this);
+        sentenceBox.prepareCanvas(R.drawable.game_complete_cloud);
+        sentenceBox.setWIDTH_POSITON_PORCENTAGE(0.945f);
+        sentenceBox.setHEIGHT_POSITON_PORCENTAGE(0.85f);
+        sentenceBox.setVECTOR_SCALABLE_PORCENTAGE(0.90f);
+
+        wordTextBox = new DrawVectorView(this);
+        wordTextBox.prepareCanvas(R.drawable.game_complete_tense);
+        wordTextBox.setWIDTH_POSITON_PORCENTAGE(0.60f);
+        wordTextBox.setHEIGHT_POSITON_PORCENTAGE(0.53f);
+        wordTextBox.setVECTOR_SCALABLE_PORCENTAGE(0.50f);
+
+        absoluteLayout.addView(sentenceBox);
+        absoluteLayout.addView(wordTextBox);
+
+
+        //////------------------------- Aquí se deben esperar al menos 1 segundo antes de cargar el juego, para poder calcular posiciones y dimensiones-------------------//////////////
+        new CountDownTimer(2000, 1) {
+            public void onFinish() {
+                sentenceBoxWidth = sentenceBox.getCanvasWidth();
+                sentenceBoxMinWidth = sentenceBox.getCanvasX();
+                wordTextBoxWidth = wordTextBox.getCanvasWidth();
+                wordTextBoxMinWidth = wordTextBox.getCanvasX();
+                setGame();
+                relativeLayout.setVisibility(View.INVISIBLE);
+            }
+            public void onTick(long millisUntilFinished) {}
+        }.start();
         //drawText(sentenceText, R.id.sentence_text, "Aquí va el texto", "Dosis-Regular.ttf", 80, 0.945f, 0.79f, true);
         //sentenceEditText = (EditText)findViewById(R.id.sentenceEditTextComplete);
         //wordTextView = (TextView)findViewById(R.id.wordTextViewComplete);
@@ -63,8 +105,6 @@ public class CompleteGameActivity extends AppCompatActivity
         //triesTextView = (TextView)findViewById(R.id.triesTextViewComplete);
 
         //sentenceEditText.setKeyListener(null);
-
-        setGame();
     }
 
     /**
@@ -89,8 +129,21 @@ public class CompleteGameActivity extends AppCompatActivity
     void setGame()
     {
         CompleteGame completeGame = completeGames.get(new Random().nextInt(completeGames.size()));
-        drawText(sentenceText, R.id.sentence_text, completeGame.get_Sentence(), "Dosis-Regular.ttf", 80, 0.945f, 0.79f, true);
-        drawText(tenceText, R.id.tence_text, completeGame.get_Word(), "Dosis-Regular.ttf", 60, 0.60f, 0.46f, false);
+        sentenceText = new DrawTextView(this);
+        sentenceText.setText(completeGame.get_Sentence(), "Dosis-Regular.ttf", 80, 0.945f, 0.65f, true, 80, sentenceBoxWidth, sentenceBoxMinWidth);
+        sentenceText.bringToFront();
+
+        tenceText = new DrawTextView(this);
+        tenceText.setText(completeGame.get_Word(), "Dosis-Regular.ttf", 60, 0.60f, 0.41f, true, 40, wordTextBoxWidth, wordTextBoxMinWidth);
+        tenceText.bringToFront();
+
+        absoluteLayout.addView(sentenceText);
+        absoluteLayout.addView(tenceText);
+
+        //drawText(sentenceText, R.id.sentence_text, completeGame.get_Sentence(), "Dosis-Regular.ttf", 80, 0.945f, 0.79f, true, 10, sentenceBoxMaxWidth - wordTextBoxMinWidth, wordTextBoxMinWidth);
+        //drawText(tenceText, R.id.tence_text, completeGame.get_Word(), "Dosis-Regular.ttf", 60, 0.60f, 0.41f, true, 10, wordTextBoxMaxWidth - wordTextBoxMinWidth, wordTextBoxMinWidth);
+
+
         //sentenceEditText.setText(completeGame.get_Sentence());
         //wordTextView.setText(completeGame.get_Word());
         //answerEditText.setText("");
@@ -117,16 +170,16 @@ public class CompleteGameActivity extends AppCompatActivity
         }
     }
 
-    private void drawVector(DrawVectorView pVector, int pIdView, float pWidthPorcent, float pHeightPorcent, float pScalePorcent) {
+    private void drawVector(DrawVectorView pVector, int pIdView, float pWidthPorcent, float pHeightPorcent, float pScalePorcent, String pVariableName) {
         pVector = (DrawVectorView) findViewById(pIdView);
         pVector.setWIDTH_POSITON_PORCENTAGE(pWidthPorcent);
         pVector.setHEIGHT_POSITON_PORCENTAGE(pHeightPorcent);
         pVector.setVECTOR_SCALABLE_PORCENTAGE(pScalePorcent);
     }
 
-    private void drawText(DrawTextView pTextObject, int pIdView, String pText, String pFont, float pSize, float pWidthPorcent, float pHeightPorcent, boolean pCenter) {
+    private void drawText(DrawTextView pTextObject, int pIdView, String pText, String pFont, float pSize, float pWidthPorcent, float pHeightPorcent, boolean pCenter, int pMargin, float pParentSize, float pParentInit) {
         pTextObject = (DrawTextView) findViewById(pIdView);
-        pTextObject.setText(pText, pFont, pSize, pWidthPorcent, pHeightPorcent, pCenter);
+        pTextObject.setText(pText, pFont, pSize, pWidthPorcent, pHeightPorcent, pCenter, pMargin, pParentSize, pParentInit);
         pTextObject.bringToFront();
     }
 }
