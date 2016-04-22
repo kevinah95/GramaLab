@@ -17,7 +17,10 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 
 import com.example.android.gramalab.R;
+import com.example.android.gramalab.activities.games.DivideGameActivity;
+import com.example.android.gramalab.activities.games.OrderGameActivity;
 import com.example.android.gramalab.activities.games.CompleteGameActivity;
+import com.example.android.gramalab.activities.games.IdentifyGameActivity;
 
 
 /**
@@ -130,27 +133,27 @@ public class SelectGameFragment extends Fragment implements View.OnClickListener
         v.startAnimation(animBtn);
         new CountDownTimer(250, 1) {
             public void onFinish() {
+                Intent intent;
                 switch (v.getId()) {
                     case R.id.btn_select_game_complete:
-                        Intent intent = new Intent(getContext(), CompleteGameActivity.class);
+                        intent = new Intent(getContext(), CompleteGameActivity.class);
                         startActivity(intent);
-                        Log.d(TAG, "TODO");
                         break;
                     case R.id.btn_select_game_correct:
                         // TODO: Make useful
                         Log.d(TAG, "TODO");
                         break;
                     case R.id.btn_select_game_fractionate:
-                        // TODO: Make useful
-                        Log.d(TAG, "TODO");
+                        intent = new Intent(getContext(), DivideGameActivity.class);
+                        startActivity(intent);
                         break;
                     case R.id.btn_select_game_identify:
-                        // TODO: Make useful
-                        Log.d(TAG, "TODO");
+                        intent = new Intent(getContext(), IdentifyGameActivity.class);
+                        startActivity(intent);
                         break;
                     case R.id.btn_select_game_order:
-                        // TODO: Make useful
-                        Log.d(TAG, "TODO");
+                        intent = new Intent(getContext(), OrderGameActivity.class);
+                        startActivity(intent);
                         break;
                 }
             }

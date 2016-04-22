@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.android.gramalab.CompleteGameActivity"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true">
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/bg_game_identify" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Numero de fallos: 0"
+        android:id="@+id/triesTextViewDivide"
+        android:textAlignment="center"
+        android:textSize="25dp"
+        android:layout_below="@+id/title"
+        android:layout_centerHorizontal="true"
+        android:paddingTop="25dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/linear_Word"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal|center_vertical"
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true">
+    </LinearLayout>
+
+    <AbsoluteLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="30dp"
+        android:id="@+id/abs_layout">
+    </AbsoluteLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/checkButtonDivide"
+            android:layout_gravity="bottom|center"
+            android:layout_marginBottom="25dp"
+            android:onClick="checkAnswer"
+            android:background="#00000000"
+            android:src="@drawable/btn_game_complete_check"/>
+    </FrameLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/rel_layout">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/imageView"
+            android:scaleType="fitXY"
+            android:src="@drawable/bg_loading"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>
