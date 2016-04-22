@@ -1,5 +1,6 @@
 package com.example.android.gramalab.activities;
 
+import android.app.Activity;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -39,11 +40,18 @@ public class MainActivity extends AppCompatActivity implements
     private PagerAdapter customPagerAdapter;
     private Stack<Integer> stackCustomViewPager = new Stack<>(); // Edited
 
+    public static Activity context;
+    public static int score;
+    public static boolean isCompletePlayed = false;
+    public static boolean isIdentifyPlayed = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //Activity FullScreen
+        score = 0;
+        context = this;
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         startMusic();
         //--------------------------Prueba Parallax

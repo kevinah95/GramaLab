@@ -15,9 +15,12 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.example.android.gramalab.R;
+import com.example.android.gramalab.activities.MainActivity;
 import com.example.android.gramalab.activities.games.CompleteGameActivity;
+import com.example.android.gramalab.utils.Timer;
 
 
 /**
@@ -132,9 +135,16 @@ public class SelectGameFragment extends Fragment implements View.OnClickListener
             public void onFinish() {
                 switch (v.getId()) {
                     case R.id.btn_select_game_complete:
-                        Intent intent = new Intent(getContext(), CompleteGameActivity.class);
-                        startActivity(intent);
-                        Log.d(TAG, "TODO");
+                        if(MainActivity.isCompletePlayed)
+                        {
+                            Toast.makeText(MainActivity.context, "Ya jugaste este juego, seleciona otro", Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            MainActivity.isCompletePlayed = true;
+                            Intent intent = new Intent(getContext(), CompleteGameActivity.class);
+                            startActivity(intent);
+                        }
                         break;
                     case R.id.btn_select_game_correct:
                         // TODO: Make useful
@@ -146,6 +156,15 @@ public class SelectGameFragment extends Fragment implements View.OnClickListener
                         break;
                     case R.id.btn_select_game_identify:
                         // TODO: Make useful
+                        if(MainActivity.isIdentifyPlayed)
+                        {
+                            Toast.makeText(MainActivity.context, "Ya jugaste este juego, seleciona otro", Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            MainActivity.isIdentifyPlayed = true;
+
+                        }
                         Log.d(TAG, "TODO");
                         break;
                     case R.id.btn_select_game_order:

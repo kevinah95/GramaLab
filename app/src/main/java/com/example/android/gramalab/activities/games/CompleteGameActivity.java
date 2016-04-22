@@ -1,16 +1,15 @@
 package com.example.android.gramalab.activities.games;
 
 
+import android.app.Activity;
+import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AbsoluteLayout;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
@@ -18,13 +17,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.gramalab.R;
+import com.example.android.gramalab.activities.MainActivity;
+import com.example.android.gramalab.logic.CompleteGame;
+import com.example.android.gramalab.utils.Timer;
+import com.example.android.gramalab.views.games.DrawTextView;
+import com.example.android.gramalab.views.games.DrawVectorView;
 
 import java.util.ArrayList;
 import java.util.Random;
-
-import com.example.android.gramalab.logic.CompleteGame;
-import com.example.android.gramalab.views.games.DrawTextView;
-import com.example.android.gramalab.views.games.DrawVectorView;
 
 
 public class CompleteGameActivity extends AppCompatActivity
@@ -54,7 +54,7 @@ public class CompleteGameActivity extends AppCompatActivity
     TextView triesTextView;
 
     int tries;
-
+    Activity context;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -67,9 +67,9 @@ public class CompleteGameActivity extends AppCompatActivity
         /*
         Aqui haria como un ciclo donde agrega a completeGames lo que haya en la base de datos
         */
-        completeGames.add(new CompleteGame("Rodrigo [Verbo] todo el día", "Verbo: Correr", "corre"));
-        completeGames.add(new CompleteGame("Carlos esta [Verbo] en este momento", "Verbo: Nadar", "nadando"));
-        completeGames.add(new CompleteGame("Tienen que [Verbo] mucho para este examen","Verbo: Estudiar","estudiar"));
+        completeGames.add(new CompleteGame("Rodrigo [Verbo] todo el día", "Verbo/Presente: Correr", "corre"));
+        completeGames.add(new CompleteGame("Carlos esta [Verbo] en este momento", "Verbo/Gerundio: Nadar", "nadando"));
+        completeGames.add(new CompleteGame("Tienen que [Verbo] mucho para este examen","Verbo/Infinitivo: Estudiar","estudiar"));
         //Aqui termina el ciclo
 
         //Cosas de Diseño
@@ -106,6 +106,7 @@ public class CompleteGameActivity extends AppCompatActivity
                 wordTextBoxMinWidth = wordTextBox.getCanvasX();
                 setGame();
                 relativeLayout.setVisibility(View.INVISIBLE);
+                new Timer(10, context);
             }
             public void onTick(long millisUntilFinished) {}
         }.start();
@@ -114,8 +115,10 @@ public class CompleteGameActivity extends AppCompatActivity
         //wordTextView = (TextView)findViewById(R.id.wordTextViewComplete);
         answerEditText = (EditText)findViewById(R.id.answer_edit_Text);
         //triesTextView = (TextView)findViewById(R.id.triesTextViewComplete);
-
         //sentenceEditText.setKeyListener(null);
+
+        context = this;
+
     }
 
     /**
@@ -162,17 +165,20 @@ public class CompleteGameActivity extends AppCompatActivity
 
     public void checkAnswer()
     {
-        if(answerEditText.getText().toString().matches(""))
-            Toast.makeText(this, "Debes escribir una respuesta", Toast.LENGTH_SHORT).show();
+        if(answerEditText.getText().toString().matches("")) {
+            //Toast.makeText(this, "Debes escribir una respuesta", Toast.LENGTH_SHORT).show();
+        }
         else
         {
             if (answerEditText.getText().toString().matches(actualGame.get_Answer())) {
-                Toast.makeText(this, "Respuesta correcta!", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "Respuesta correcta!", Toast.LENGTH_SHORT).show();
+                MainActivity.score++;
                 setGame();
             }
             else
             {
-                Toast.makeText(this, "Respuesta incorrecta", Toast.LENGTH_SHORT).show();
+                MainActivity.score--;
+                //Toast.makeText(this, "Respuesta incorrecta", Toast.LENGTH_SHORT).show();
                 //triesTextView.setText("Número de fallos: " + ++tries);
             }
         }
@@ -186,5 +192,9 @@ public class CompleteGameActivity extends AppCompatActivity
             }
             public void onTick(long millisUntilFinished) {}
         }.start();
+    }
+
+    @Override
+    public void onBackPressed() {
     }
 }
