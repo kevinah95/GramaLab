@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,13 +19,11 @@ import android.widget.Toast;
 
 import com.example.android.gramalab.R;
 import com.example.android.gramalab.activities.MainActivity;
+import com.example.android.gramalab.activities.games.CompleteGameActivity;
 import com.example.android.gramalab.activities.games.CorrectGameActivity;
 import com.example.android.gramalab.activities.games.DivideGameActivity;
-import com.example.android.gramalab.activities.games.OrderGameActivity;
-import com.example.android.gramalab.activities.games.CompleteGameActivity;
 import com.example.android.gramalab.activities.games.IdentifyGameActivity;
-
-import org.w3c.dom.Text;
+import com.example.android.gramalab.activities.games.OrderGameActivity;
 
 
 /**
@@ -59,21 +56,26 @@ public class SelectGameFragment extends Fragment implements View.OnClickListener
         // Required empty public constructor
     }
     public static TextView scoreView;
+
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser)
-            if(btnSelectGameComplete != null && btnSelectGameCorrect != null
-                    && btnSelectGameFractionate != null && btnSelectGameIdentify != null
-                    && btnSelectGameOrder != null && instance == null) {
-                instance = this;
+        if (isVisibleToUser) {
+            btnSelectGameComplete.setVisibility(View.INVISIBLE);
+            btnSelectGameCorrect.setVisibility(View.INVISIBLE);
+            btnSelectGameFractionate.setVisibility(View.INVISIBLE);
+            btnSelectGameIdentify.setVisibility(View.INVISIBLE);
+            btnSelectGameOrder.setVisibility(View.INVISIBLE);
 
+            if (MainActivity.isFirstLevel) {
                 buttonsAnimation.showAnimation(btnSelectGameComplete, buttonsAnimation.animTranslateYInverted);
                 buttonsAnimation.showAnimation(btnSelectGameIdentify, buttonsAnimation.animTranslate);
+                buttonsAnimation.showAnimation(btnSelectGameCorrect, buttonsAnimation.animTranslateY);
+            } else {
                 buttonsAnimation.showAnimation(btnSelectGameOrder, buttonsAnimation.animTranslateInverted);
                 buttonsAnimation.showAnimation(btnSelectGameFractionate, buttonsAnimation.animTranslate);
-                buttonsAnimation.showAnimation(btnSelectGameCorrect, buttonsAnimation.animTranslateY);
             }
+        }
     }
 
     @Override
@@ -102,14 +104,6 @@ public class SelectGameFragment extends Fragment implements View.OnClickListener
         btnSelectGameIdentify.setOnClickListener(this);
         btnSelectGameOrder.setOnClickListener(this);
 
-        if(instance != null)
-        {
-            btnSelectGameComplete.setVisibility(View.VISIBLE);
-            btnSelectGameCorrect.setVisibility(View.VISIBLE);
-            btnSelectGameFractionate.setVisibility(View.VISIBLE);
-            btnSelectGameIdentify.setVisibility(View.VISIBLE);
-            btnSelectGameOrder.setVisibility(View.VISIBLE);
-        }
         scoreView.setText(MainActivity.scoreText + MainActivity.score);
         return view;
     }
