@@ -11,6 +11,7 @@ import android.view.Gravity;
 import android.widget.Toast;
 
 import com.example.android.gramalab.activities.MainActivity;
+import com.example.android.gramalab.fragments.SelectGameFragment;
 
 /**
  * Created by Farcem on 21-Apr-16.
@@ -38,10 +39,13 @@ public class Timer
 
             public void onFinish()
             {
-                if(MainActivity.isCompletePlayed && MainActivity.isIdentifyPlayed)
+                if(MainActivity.isCompletePlayed && MainActivity.isIdentifyPlayed && MainActivity.isDividePlayed && MainActivity.isOrderPlayed)
                 {
                     MainActivity.isCompletePlayed = false;
                     MainActivity.isIdentifyPlayed = false;
+                    MainActivity.isDividePlayed = false;
+                    MainActivity.isOrderPlayed = false;
+
                     new AlertDialog.Builder(context)
                             .setTitle("Fin del juego")
                             .setMessage("Puntuación final: " + MainActivity.score)
@@ -49,6 +53,7 @@ public class Timer
                             {
                                 public void onClick(DialogInterface dialog, int which)
                                 {
+                                    MainActivity.score = 0;
                                     Intent intent = new Intent(context, MainActivity.class);
                                     context.startActivity(intent);
                                 }
@@ -58,6 +63,7 @@ public class Timer
                 }
                 else
                 {
+                    SelectGameFragment.scoreView.setText(MainActivity.scoreText + MainActivity.score);
                     context.finish();
                 }
             }

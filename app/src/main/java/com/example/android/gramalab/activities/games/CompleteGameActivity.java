@@ -53,7 +53,6 @@ public class CompleteGameActivity extends AppCompatActivity
     EditText answerEditText;
     TextView triesTextView;
 
-    int tries;
     Activity context;
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -96,7 +95,7 @@ public class CompleteGameActivity extends AppCompatActivity
         absoluteLayout.addView(sentenceBox);
         absoluteLayout.addView(wordTextBox);
 
-
+        context = this;
         //////------------------------- Aquí se deben esperar al menos 1 segundo antes de cargar el juego, para poder calcular posiciones y dimensiones-------------------//////////////
         new CountDownTimer(2000, 1) {
             public void onFinish() {
@@ -114,10 +113,8 @@ public class CompleteGameActivity extends AppCompatActivity
         //sentenceEditText = (EditText)findViewById(R.id.sentenceEditTextComplete);
         //wordTextView = (TextView)findViewById(R.id.wordTextViewComplete);
         answerEditText = (EditText)findViewById(R.id.answer_edit_Text);
-        //triesTextView = (TextView)findViewById(R.id.triesTextViewComplete);
+        triesTextView = (TextView)findViewById(R.id.triesTextViewComplete);
         //sentenceEditText.setKeyListener(null);
-
-        context = this;
 
     }
 
@@ -158,28 +155,22 @@ public class CompleteGameActivity extends AppCompatActivity
         //sentenceEditText.setText(completeGame.get_Sentence());
         //wordTextView.setText(completeGame.get_Word());
         answerEditText.setText("");
-        //tries = 0;
-        //triesTextView.setText("Número de fallos: " + tries);
+        triesTextView.setText(MainActivity.scoreText + MainActivity.score);
+        triesTextView.bringToFront();
         actualGame = completeGame;
     }
 
     public void checkAnswer()
     {
-        if(answerEditText.getText().toString().matches("")) {
-            //Toast.makeText(this, "Debes escribir una respuesta", Toast.LENGTH_SHORT).show();
-        }
-        else
+        if(!answerEditText.getText().toString().matches(""))
         {
             if (answerEditText.getText().toString().matches(actualGame.get_Answer())) {
-                //Toast.makeText(this, "Respuesta correcta!", Toast.LENGTH_SHORT).show();
-                MainActivity.score++;
+                triesTextView.setText(MainActivity.scoreText + ++MainActivity.score);
                 setGame();
             }
             else
             {
-                MainActivity.score--;
-                //Toast.makeText(this, "Respuesta incorrecta", Toast.LENGTH_SHORT).show();
-                //triesTextView.setText("Número de fallos: " + ++tries);
+                triesTextView.setText(MainActivity.scoreText + --MainActivity.score);
             }
         }
     }

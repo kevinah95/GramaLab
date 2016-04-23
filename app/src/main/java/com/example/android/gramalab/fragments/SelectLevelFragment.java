@@ -46,7 +46,8 @@ public class SelectLevelFragment extends Fragment implements View.OnClickListene
     }
 
     @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
+    public void setUserVisibleHint(boolean isVisibleToUser)
+    {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser)
             if(btnSelectLevelFirstCycle != null && btnSelectLevelSecondCycle != null && instance == null) {
@@ -58,14 +59,13 @@ public class SelectLevelFragment extends Fragment implements View.OnClickListene
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_select_level, container, false);
         animBtn = AnimationUtils.loadAnimation(getActivity(), R.anim.btn_scale);
 
         buttonsAnimation = new ButtonAnimation(getActivity()) {};
-
         customViewPager = (ViewPager) getActivity().findViewById(R.id.custom_view_pager);
 
         btnSelectLevelFirstCycle = (ImageButton) view.findViewById(R.id.btn_select_level_first_cycle);
@@ -82,8 +82,7 @@ public class SelectLevelFragment extends Fragment implements View.OnClickListene
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+            throw new RuntimeException(context.toString() + " must implement OnFragmentInteractionListener");
         }
     }
 
@@ -94,10 +93,13 @@ public class SelectLevelFragment extends Fragment implements View.OnClickListene
     }
 
     @Override
-    public void onClick(final View v) {
+    public void onClick(final View v)
+    {
         v.startAnimation(animBtn);
-        new CountDownTimer(250, 1) {
-            public void onFinish() {
+        new CountDownTimer(250, 1)
+        {
+            public void onFinish()
+            {
                 switch (v.getId()) {
                     case R.id.btn_select_level_first_cycle:
                         // TODO: Make useful

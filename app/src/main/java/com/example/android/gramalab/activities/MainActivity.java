@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity implements
 
     public static final String TAG = MainActivity.class.getName();
 
-
     private MediaPlayer mainScreenSound;
     private int whenStop;
 
@@ -41,9 +40,14 @@ public class MainActivity extends AppCompatActivity implements
     private Stack<Integer> stackCustomViewPager = new Stack<>(); // Edited
 
     public static Activity context;
+    public static String scoreText = "Puntaje: ";
+    public static int gameSeconds = 10;
     public static int score;
+
     public static boolean isCompletePlayed = false;
     public static boolean isIdentifyPlayed = false;
+    public static boolean isDividePlayed = false;
+    public static boolean isOrderPlayed = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,8 +91,6 @@ public class MainActivity extends AppCompatActivity implements
             @Override
             public void onPageScrollStateChanged(int state) { }
         });
-
-
     }
 
     /**
@@ -110,17 +112,14 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
-
-
-
-
-
-
-
     public void startMusic(){
         mainScreenSound = MediaPlayer.create(this, R.raw.maintheme);
         mainScreenSound.start();
         mainScreenSound.setLooping(true);
+    }
+
+    @Override
+    public void onBackPressed() {
     }
 
     @Override
@@ -161,6 +160,4 @@ public class MainActivity extends AppCompatActivity implements
     public void onFragmentInteraction(Uri uri) {
 
     }
-
-
 }

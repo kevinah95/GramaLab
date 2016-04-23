@@ -80,6 +80,7 @@ public class DrawVectorView extends View {
         int newSvgHeight = GraphicsUtils.calculateAspectRatio(svgWidth, newSvgWidth, svgHeight);
         canvasWidth = newSvgWidth;
         canvasX = canvasPosX;
+        Log.d("Parent Heigth", "" + newSvgHeight);
 
         svgFromSrc.setBounds(0, 0, newSvgWidth, newSvgHeight);
         svgFromSrc.draw(pCanvas);

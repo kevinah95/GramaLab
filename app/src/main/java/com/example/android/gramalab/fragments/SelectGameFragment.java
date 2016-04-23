@@ -15,12 +15,18 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.gramalab.R;
+
 import com.example.android.gramalab.activities.MainActivity;
+import com.example.android.gramalab.activities.games.DivideGameActivity;
+import com.example.android.gramalab.activities.games.OrderGameActivity;
 import com.example.android.gramalab.activities.games.CompleteGameActivity;
-import com.example.android.gramalab.utils.Timer;
+import com.example.android.gramalab.activities.games.IdentifyGameActivity;
+
+import org.w3c.dom.Text;
 
 
 /**
@@ -52,7 +58,7 @@ public class SelectGameFragment extends Fragment implements View.OnClickListener
     public SelectGameFragment() {
         // Required empty public constructor
     }
-
+    public static TextView scoreView;
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
@@ -61,6 +67,7 @@ public class SelectGameFragment extends Fragment implements View.OnClickListener
                     && btnSelectGameFractionate != null && btnSelectGameIdentify != null
                     && btnSelectGameOrder != null && instance == null) {
                 instance = this;
+
                 buttonsAnimation.showAnimation(btnSelectGameComplete, buttonsAnimation.animTranslateYInverted);
                 buttonsAnimation.showAnimation(btnSelectGameIdentify, buttonsAnimation.animTranslate);
                 buttonsAnimation.showAnimation(btnSelectGameOrder, buttonsAnimation.animTranslateInverted);
@@ -87,6 +94,8 @@ public class SelectGameFragment extends Fragment implements View.OnClickListener
         btnSelectGameIdentify = (ImageButton) view.findViewById(R.id.btn_select_game_identify);
         btnSelectGameOrder = (ImageButton) view.findViewById(R.id.btn_select_game_order);
 
+        scoreView = (TextView) view.findViewById(R.id.triesTextView);
+
         btnSelectGameComplete.setOnClickListener(this);
         btnSelectGameCorrect.setOnClickListener(this);
         btnSelectGameFractionate.setOnClickListener(this);
@@ -100,7 +109,7 @@ public class SelectGameFragment extends Fragment implements View.OnClickListener
             btnSelectGameIdentify.setVisibility(View.VISIBLE);
             btnSelectGameOrder.setVisibility(View.VISIBLE);
         }
-
+        scoreView.setText(MainActivity.scoreText + MainActivity.score);
         return view;
     }
 
@@ -117,8 +126,7 @@ public class SelectGameFragment extends Fragment implements View.OnClickListener
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+            throw new RuntimeException(context.toString()  + " must implement OnFragmentInteractionListener");
         }
     }
 
@@ -133,43 +141,50 @@ public class SelectGameFragment extends Fragment implements View.OnClickListener
         v.startAnimation(animBtn);
         new CountDownTimer(250, 1) {
             public void onFinish() {
+                Intent intent;
                 switch (v.getId()) {
                     case R.id.btn_select_game_complete:
-                        if(MainActivity.isCompletePlayed)
-                        {
+                        if(MainActivity.isCompletePlayed) {
                             Toast.makeText(MainActivity.context, "Ya jugaste este juego, seleciona otro", Toast.LENGTH_SHORT).show();
                         }
-                        else
-                        {
+                        else {
                             MainActivity.isCompletePlayed = true;
-                            Intent intent = new Intent(getContext(), CompleteGameActivity.class);
+                            intent = new Intent(getContext(), CompleteGameActivity.class);
                             startActivity(intent);
                         }
                         break;
                     case R.id.btn_select_game_correct:
-                        // TODO: Make useful
                         Log.d(TAG, "TODO");
                         break;
                     case R.id.btn_select_game_fractionate:
-                        // TODO: Make useful
-                        Log.d(TAG, "TODO");
-                        break;
-                    case R.id.btn_select_game_identify:
-                        // TODO: Make useful
-                        if(MainActivity.isIdentifyPlayed)
-                        {
+                        if(MainActivity.isDividePlayed) {
                             Toast.makeText(MainActivity.context, "Ya jugaste este juego, seleciona otro", Toast.LENGTH_SHORT).show();
                         }
-                        else
-                        {
-                            MainActivity.isIdentifyPlayed = true;
-
+                        else {
+                            MainActivity.isDividePlayed = true;
+                            intent = new Intent(getContext(), DivideGameActivity.class);
+                            startActivity(intent);
                         }
-                        Log.d(TAG, "TODO");
+                        break;
+                    case R.id.btn_select_game_identify:
+                        if(MainActivity.isIdentifyPlayed) {
+                            Toast.makeText(MainActivity.context, "Ya jugaste este juego, seleciona otro", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            MainActivity.isIdentifyPlayed = true;
+                            intent = new Intent(getContext(), IdentifyGameActivity.class);
+                            startActivity(intent);
+                        }
                         break;
                     case R.id.btn_select_game_order:
-                        // TODO: Make useful
-                        Log.d(TAG, "TODO");
+                        if(MainActivity.isOrderPlayed){
+                            Toast.makeText(MainActivity.context, "Ya jugaste este juego, seleciona otro", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            MainActivity.isOrderPlayed = true;
+                            intent = new Intent(getContext(), OrderGameActivity.class);
+                            startActivity(intent);
+                        }
                         break;
                 }
             }

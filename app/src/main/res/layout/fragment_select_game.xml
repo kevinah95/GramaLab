@@ -84,4 +84,17 @@
         </LinearLayout>
     </RelativeLayout>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Puntaje: 0"
+        android:id="@+id/triesTextView"
+        android:textAlignment="center"
+        android:textSize="25dp"
+        android:paddingTop="10dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textColor="@color/abc_input_method_navigation_guard" />
+
 </FrameLayout>
