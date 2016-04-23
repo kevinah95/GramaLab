@@ -51,7 +51,8 @@ public class SelectLevelFragment extends Fragment implements View.OnClickListene
     {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser)
-            if(btnSelectLevelFirstCycle != null && btnSelectLevelSecondCycle != null && instance == null) {
+            if(btnSelectLevelFirstCycle != null && btnSelectLevelSecondCycle != null && instance == null)
+            {
                 instance = this;
                 buttonsAnimation.showAnimation(btnSelectLevelFirstCycle, buttonsAnimation.animTranslate);
                 buttonsAnimation.showAnimation(btnSelectLevelSecondCycle, buttonsAnimation.animTranslateInverted);
