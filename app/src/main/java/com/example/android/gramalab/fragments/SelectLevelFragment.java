@@ -15,6 +15,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 
 import com.example.android.gramalab.R;
+import com.example.android.gramalab.activities.MainActivity;
 
 
 /**
@@ -103,11 +104,14 @@ public class SelectLevelFragment extends Fragment implements View.OnClickListene
                 switch (v.getId()) {
                     case R.id.btn_select_level_first_cycle:
                         // TODO: Make useful
+                        MainActivity.isFirstLevel = true;
                         customViewPager.setCurrentItem(POSITION_SELECT_GAME_FRAGMENT, true);
                         Log.d(TAG, "TODO");
                         break;
                     case R.id.btn_select_level_second_cycle:
                         // TODO: Make useful
+                        MainActivity.isFirstLevel = false;
+                        customViewPager.setCurrentItem(POSITION_SELECT_GAME_FRAGMENT, true);
                         Log.d(TAG,"TODO");
                         break;
                 }

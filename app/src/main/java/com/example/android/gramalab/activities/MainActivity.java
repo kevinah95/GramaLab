@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements
     public static String scoreText = "Puntaje: ";
     public static int gameSeconds = 5;
     public static int score;
+    public static boolean isFirstLevel;
 
     public static boolean isCompletePlayed = false;
     public static boolean isIdentifyPlayed = false;
