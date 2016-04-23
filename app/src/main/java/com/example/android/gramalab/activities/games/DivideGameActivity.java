@@ -1,9 +1,11 @@
 package com.example.android.gramalab.activities.games;
 
+import android.graphics.Point;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +40,8 @@ public class DivideGameActivity extends AppCompatActivity
     EditText answerEditText;
     TextView triesTextView;
 
+    int screenWidth;
+
     int tries;
 
     @Override
@@ -51,6 +55,11 @@ public class DivideGameActivity extends AppCompatActivity
         absoluteLayout = (AbsoluteLayout) findViewById(R.id.abs_layout);
         relativeLayout = (RelativeLayout) findViewById(R.id.rel_layout);
 
+
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        screenWidth = size.x;
         /*
         Aqui haria como un ciclo donde agrega a divideGames lo que haya en la base de datos
         */
@@ -119,7 +128,7 @@ public class DivideGameActivity extends AppCompatActivity
             absoluteLayout.removeView(wordBox);
         }
 
-        wordBox.setText(actualGame.get_Word(), "Dosis-Regular.ttf", 80, 0.945f, 0.35f, true, 80, 1200, 0);
+        wordBox.setText(actualGame.get_Word(), "Dosis-Regular.ttf", 80, 0.945f, 0.35f, true, 80, screenWidth, 0);
         wordBox.bringToFront();
 
         absoluteLayout.addView(wordBox);

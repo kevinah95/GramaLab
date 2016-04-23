@@ -7,33 +7,22 @@
     android:descendantFocusability="beforeDescendants"
     android:focusableInTouchMode="true">
 
-
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="fitXY"
-        android:src="@drawable/bg_game_divide" />
+        android:src="@drawable/bg_game_correct" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Numero de fallos: 0"
-        android:id="@+id/triesTextViewDivide"
+        android:id="@+id/triesTextViewCorrect"
         android:textAlignment="center"
         android:textSize="25dp"
         android:layout_below="@+id/title"
         android:layout_centerHorizontal="true"
         android:paddingTop="25dp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/linear_Word"
-        android:orientation="horizontal"
-        android:gravity="center_horizontal|center_vertical"
-        android:descendantFocusability="beforeDescendants"
-        android:focusableInTouchMode="true">
-    </LinearLayout>
 
     <AbsoluteLayout
         android:layout_width="match_parent"
@@ -41,6 +30,23 @@
         android:layout_marginTop="30dp"
         android:id="@+id/abs_layout">
     </AbsoluteLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/answerEditTextCorrect"
+            android:textAlignment="center"
+            android:paddingTop="30dp"
+            android:hint="Escribí tu respuesta aquí"
+            android:background="@drawable/edit_text_custom"/>
+
+    </LinearLayout>
+
 
     <FrameLayout
         android:layout_width="match_parent"

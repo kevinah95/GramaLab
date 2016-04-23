@@ -17,6 +17,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 
 import com.example.android.gramalab.R;
+import com.example.android.gramalab.activities.games.CorrectGameActivity;
 import com.example.android.gramalab.activities.games.DivideGameActivity;
 import com.example.android.gramalab.activities.games.OrderGameActivity;
 import com.example.android.gramalab.activities.games.CompleteGameActivity;
@@ -140,8 +141,8 @@ public class SelectGameFragment extends Fragment implements View.OnClickListener
                         startActivity(intent);
                         break;
                     case R.id.btn_select_game_correct:
-                        // TODO: Make useful
-                        Log.d(TAG, "TODO");
+                        intent = new Intent(getContext(), CorrectGameActivity.class);
+                        startActivity(intent);
                         break;
                     case R.id.btn_select_game_fractionate:
                         intent = new Intent(getContext(), DivideGameActivity.class);

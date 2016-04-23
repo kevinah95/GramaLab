@@ -8,7 +8,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"
+        android:scaleType="fitXY"
         android:src="@drawable/bg_game_complete" />
 
 
@@ -38,7 +38,7 @@
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/edit_text_custom"
                 android:textSize="30dp"
-                android:textColor="#ffffff"
+                android:textColor="#000000"
                 android:layout_marginBottom="10dp"
                 android:hint="Escribí aquí tu respuesta"
                 android:textCursorDrawable="@color/light_blue"/>

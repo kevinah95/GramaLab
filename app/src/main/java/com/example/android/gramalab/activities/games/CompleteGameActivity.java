@@ -137,11 +137,16 @@ public class CompleteGameActivity extends AppCompatActivity
     void setGame()
     {
         CompleteGame completeGame = completeGames.get(new Random().nextInt(completeGames.size()));
-        sentenceText = new DrawTextView(this);
+        if(sentenceText == null || tenceText == null) {
+            sentenceText = new DrawTextView(this);
+            tenceText = new DrawTextView(this);
+        }
+        else {
+            absoluteLayout.removeView(sentenceText);
+            absoluteLayout.removeView(tenceText);
+        }
         sentenceText.setText(completeGame.get_Sentence(), "Dosis-Regular.ttf", 80, 0.945f, 0.62f, true, 80, sentenceBoxWidth, sentenceBoxMinWidth);
         sentenceText.bringToFront();
-
-        tenceText = new DrawTextView(this);
         tenceText.setText(completeGame.get_Word(), "Dosis-Regular.ttf", 60, 0.60f, 0.41f, true, 40, wordTextBoxWidth, wordTextBoxMinWidth);
         tenceText.bringToFront();
 

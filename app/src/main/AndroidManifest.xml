@@ -25,6 +25,7 @@
         <activity android:name=".activities.games.IdentifyGameActivity" />
         <activity android:name=".activities.games.OrderGameActivity" />
         <activity android:name=".activities.games.DivideGameActivity" />
+        <activity android:name=".activities.games.CorrectGameActivity" />
     </application>
 
 </manifest>
