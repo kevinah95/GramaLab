@@ -45,7 +45,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     private PetsView petsViewComma;
 
     private static final int POSITION_SELECT_LEVEL_FRAGMENT = 1;
-
+    private static final int POSITION_OPTIONS_FRAGMENT = 3;
     private static HomeFragment instance = null;
 
     public HomeFragment() {
@@ -154,8 +154,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                         customViewPager.setCurrentItem(POSITION_SELECT_LEVEL_FRAGMENT, true);
                         break;
                     case R.id.btn_options:
-                        // TODO: Make useful
-                        Log.d(TAG,"TODO");
+                        customViewPager.setCurrentItem(POSITION_OPTIONS_FRAGMENT, true);
                         break;
                     case R.id.btn_exit:
                         getActivity().finish();

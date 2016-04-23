@@ -12,6 +12,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
 
+import com.example.android.gramalab.fragments.OptionsFragment;
 import com.example.android.gramalab.views.CustomPagerAdapter;
 import com.example.android.gramalab.views.CustomViewPager;
 import com.example.android.gramalab.fragments.HomeFragment;
@@ -27,12 +28,13 @@ import java.util.Stack;
 public class MainActivity extends AppCompatActivity implements
         HomeFragment.OnFragmentInteractionListener,
         SelectLevelFragment.OnFragmentInteractionListener,
-        SelectGameFragment.OnFragmentInteractionListener
+        SelectGameFragment.OnFragmentInteractionListener,
+        OptionsFragment.OnFragmentInteractionListener
         {
 
     public static final String TAG = MainActivity.class.getName();
 
-    private MediaPlayer mainScreenSound;
+    public static MediaPlayer mainScreenSound;
     private int whenStop;
 
     private static CustomViewPager customViewPager;
@@ -69,6 +71,7 @@ public class MainActivity extends AppCompatActivity implements
         fragments.add(Fragment.instantiate(this, HomeFragment.class.getName()));
         fragments.add(Fragment.instantiate(this, SelectLevelFragment.class.getName()));
         fragments.add(Fragment.instantiate(this, SelectGameFragment.class.getName()));
+        fragments.add(Fragment.instantiate(this, OptionsFragment.class.getName()));
         customPagerAdapter = new CustomPagerAdapter(super.getSupportFragmentManager(), fragments);
         customViewPager.setAdapter(customPagerAdapter);
 
@@ -124,6 +127,13 @@ public class MainActivity extends AppCompatActivity implements
         mainScreenSound.start();
         mainScreenSound.setLooping(true);
     }
+            public void stopMusic(){
+
+                mainScreenSound.stop();
+
+            }
+
+
 
     @Override
     public void onBackPressed() {
