@@ -35,19 +35,20 @@ public class MainActivity extends AppCompatActivity implements
     private MediaPlayer mainScreenSound;
     private int whenStop;
 
-    private CustomViewPager customViewPager;
+    private static CustomViewPager customViewPager;
     private PagerAdapter customPagerAdapter;
     private Stack<Integer> stackCustomViewPager = new Stack<>(); // Edited
 
     public static Activity context;
     public static String scoreText = "Puntaje: ";
-    public static int gameSeconds = 10;
+    public static int gameSeconds = 5;
     public static int score;
 
     public static boolean isCompletePlayed = false;
     public static boolean isIdentifyPlayed = false;
     public static boolean isDividePlayed = false;
     public static boolean isOrderPlayed = false;
+    public static boolean isCorrectPlayed = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +111,11 @@ public class MainActivity extends AppCompatActivity implements
                             | View.SYSTEM_UI_FLAG_FULLSCREEN
                             | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
         }
+    }
+
+    public static void restartGame()
+    {
+        customViewPager.setCurrentItem(0, true);
     }
 
     public void startMusic(){

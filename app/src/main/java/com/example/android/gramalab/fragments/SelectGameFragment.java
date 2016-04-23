@@ -19,8 +19,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.gramalab.R;
-
 import com.example.android.gramalab.activities.MainActivity;
+import com.example.android.gramalab.activities.games.CorrectGameActivity;
 import com.example.android.gramalab.activities.games.DivideGameActivity;
 import com.example.android.gramalab.activities.games.OrderGameActivity;
 import com.example.android.gramalab.activities.games.CompleteGameActivity;
@@ -154,7 +154,14 @@ public class SelectGameFragment extends Fragment implements View.OnClickListener
                         }
                         break;
                     case R.id.btn_select_game_correct:
-                        Log.d(TAG, "TODO");
+                        if (MainActivity.isCorrectPlayed) {
+                            Toast.makeText(MainActivity.context, "Ya jugaste este juego, seleciona otro", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            MainActivity.isCorrectPlayed = true;
+                            intent = new Intent(getContext(), CorrectGameActivity.class);
+                            startActivity(intent);
+                        }
                         break;
                     case R.id.btn_select_game_fractionate:
                         if(MainActivity.isDividePlayed) {

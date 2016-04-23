@@ -1,15 +1,16 @@
 package com.example.android.gramalab.activities.games;
 
+
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.graphics.Point;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Gravity;
+import android.view.Display;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AbsoluteLayout;
@@ -17,7 +18,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.android.gramalab.R;
 import com.example.android.gramalab.activities.MainActivity;
@@ -45,6 +45,10 @@ public class DivideGameActivity extends AppCompatActivity
     TextView triesTextView;
 
     Activity context;
+    int screenWidth;
+
+    int sucessValue = 5;
+    int failValue = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -57,6 +61,11 @@ public class DivideGameActivity extends AppCompatActivity
         absoluteLayout = (AbsoluteLayout) findViewById(R.id.abs_layout);
         relativeLayout = (RelativeLayout) findViewById(R.id.rel_layout);
 
+
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        screenWidth = size.x;
         /*
         Aqui haria como un ciclo donde agrega a divideGames lo que haya en la base de datos
         */
@@ -133,7 +142,7 @@ public class DivideGameActivity extends AppCompatActivity
             absoluteLayout.removeView(wordBox);
         }
 
-        wordBox.setText(actualGame.get_Word(), "Dosis-Regular.ttf", 80, 0.945f, 0.35f, true, 80, 1200, 0);
+        wordBox.setText(actualGame.get_Word(), "Dosis-Regular.ttf", 80, 0.945f, 0.35f, true, 80, screenWidth, 0);
         wordBox.bringToFront();
 
         absoluteLayout.addView(wordBox);
@@ -164,12 +173,12 @@ public class DivideGameActivity extends AppCompatActivity
         if(!answer.matches(""))
         {
             if (answer.matches(actualGame.get_DividedWord())) {
-                triesTextView.setText(MainActivity.scoreText + ++MainActivity.score);
+                triesTextView.setText(MainActivity.scoreText +(MainActivity.score += sucessValue));
                 setGame();
             }
             else
             {
-                triesTextView.setText(MainActivity.scoreText + --MainActivity.score);
+                triesTextView.setText(MainActivity.scoreText + (MainActivity.score -= failValue));
             }
         }
     }

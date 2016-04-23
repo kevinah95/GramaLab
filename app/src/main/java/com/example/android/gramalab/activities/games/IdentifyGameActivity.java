@@ -50,6 +50,10 @@ public class IdentifyGameActivity extends AppCompatActivity
     ImageButton buttonAdjective;
     ImageButton buttonArticle;
     Activity context;
+
+    int sucessValue = 1;
+    int failValue = 2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -157,12 +161,12 @@ public class IdentifyGameActivity extends AppCompatActivity
     {
         if (pType.matches(actualGame.get_Type()))
         {
-            triesTextView.setText(MainActivity.scoreText + ++MainActivity.score);
+            triesTextView.setText(MainActivity.scoreText +(MainActivity.score += sucessValue));
             setGame();
         }
         else
         {
-            triesTextView.setText(MainActivity.scoreText + --MainActivity.score);
+            triesTextView.setText(MainActivity.scoreText + (MainActivity.score -= failValue));
         }
     }
 

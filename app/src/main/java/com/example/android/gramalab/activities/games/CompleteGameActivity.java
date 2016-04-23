@@ -48,10 +48,10 @@ public class CompleteGameActivity extends AppCompatActivity
     private float wordTextBoxWidth;
     private float wordTextBoxMinWidth;
 
-    EditText sentenceEditText;
-    TextView wordTextView;
     EditText answerEditText;
     TextView triesTextView;
+    int sucessValue = 2;
+    int failValue = 1;
 
     Activity context;
     @Override
@@ -105,7 +105,7 @@ public class CompleteGameActivity extends AppCompatActivity
                 wordTextBoxMinWidth = wordTextBox.getCanvasX();
                 setGame();
                 relativeLayout.setVisibility(View.INVISIBLE);
-                new Timer(10, context);
+                new Timer(MainActivity.gameSeconds, context);
             }
             public void onTick(long millisUntilFinished) {}
         }.start();
@@ -137,11 +137,16 @@ public class CompleteGameActivity extends AppCompatActivity
     void setGame()
     {
         CompleteGame completeGame = completeGames.get(new Random().nextInt(completeGames.size()));
-        sentenceText = new DrawTextView(this);
+        if(sentenceText == null || tenceText == null) {
+            sentenceText = new DrawTextView(this);
+            tenceText = new DrawTextView(this);
+        }
+        else {
+            absoluteLayout.removeView(sentenceText);
+            absoluteLayout.removeView(tenceText);
+        }
         sentenceText.setText(completeGame.get_Sentence(), "Dosis-Regular.ttf", 80, 0.945f, 0.62f, true, 80, sentenceBoxWidth, sentenceBoxMinWidth);
         sentenceText.bringToFront();
-
-        tenceText = new DrawTextView(this);
         tenceText.setText(completeGame.get_Word(), "Dosis-Regular.ttf", 60, 0.60f, 0.41f, true, 40, wordTextBoxWidth, wordTextBoxMinWidth);
         tenceText.bringToFront();
 
@@ -164,13 +169,13 @@ public class CompleteGameActivity extends AppCompatActivity
     {
         if(!answerEditText.getText().toString().matches(""))
         {
-            if (answerEditText.getText().toString().matches(actualGame.get_Answer())) {
-                triesTextView.setText(MainActivity.scoreText + ++MainActivity.score);
+            if (answerEditText.getText().toString().toLowerCase().matches(actualGame.get_Answer().toLowerCase())) {
+                triesTextView.setText(MainActivity.scoreText +(MainActivity.score += sucessValue));
                 setGame();
             }
             else
             {
-                triesTextView.setText(MainActivity.scoreText + --MainActivity.score);
+                triesTextView.setText(MainActivity.scoreText + (MainActivity.score -= failValue));
             }
         }
     }

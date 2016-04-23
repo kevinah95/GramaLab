@@ -38,6 +38,9 @@ public class OrderGameActivity extends AppCompatActivity
 
     Activity context;
 
+    int sucessValue = 5;
+    int failValue = 2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -51,9 +54,9 @@ public class OrderGameActivity extends AppCompatActivity
         /*
         Aqui haria como un ciclo donde agrega a orderGames lo que haya en la base de datos
         */
-        orderGames.add(new OrderGame("Dicen que va a haber mucha comida"));
+        orderGames.add(new OrderGame("Dicen que hay mucha comida"));
         orderGames.add(new OrderGame("Vamos para allá"));
-        orderGames.add(new OrderGame("Cuando llegue a la tienda pregunte si hay sal"));
+        orderGames.add(new OrderGame("Pregunte si hay sal"));
         //Aqui termina el ciclo
         gridViewSentence = (GridLayout) findViewById(R.id.gridViewSentence);
         gridViewAnswer = (GridLayout) findViewById(R.id.gridViewAnswer);
@@ -142,12 +145,12 @@ public class OrderGameActivity extends AppCompatActivity
         {
             if(answer.matches(actualGame.get_CorrectSentece().trim()))
             {
-                triesTextView.setText(MainActivity.scoreText + ++MainActivity.score);
+                triesTextView.setText(MainActivity.scoreText +(MainActivity.score += sucessValue));
                 setGame();
             }
             else
             {
-                triesTextView.setText(MainActivity.scoreText + --MainActivity.score);
+                triesTextView.setText(MainActivity.scoreText + (MainActivity.score -= failValue));
             }
         }
     }

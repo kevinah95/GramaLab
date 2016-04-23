@@ -160,7 +160,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                     case R.id.btn_exit:
                         getActivity().finish();
                         break;
-
                 }
             }
             public void onTick(long millisUntilFinished) {}

@@ -39,12 +39,13 @@ public class Timer
 
             public void onFinish()
             {
-                if(MainActivity.isCompletePlayed && MainActivity.isIdentifyPlayed && MainActivity.isDividePlayed && MainActivity.isOrderPlayed)
+                if(MainActivity.isCompletePlayed && MainActivity.isIdentifyPlayed && MainActivity.isDividePlayed && MainActivity.isOrderPlayed && MainActivity.isCorrectPlayed)
                 {
                     MainActivity.isCompletePlayed = false;
                     MainActivity.isIdentifyPlayed = false;
                     MainActivity.isDividePlayed = false;
                     MainActivity.isOrderPlayed = false;
+                    MainActivity.isCorrectPlayed = false;
 
                     new AlertDialog.Builder(context)
                             .setTitle("Fin del juego")
@@ -54,8 +55,8 @@ public class Timer
                                 public void onClick(DialogInterface dialog, int which)
                                 {
                                     MainActivity.score = 0;
-                                    Intent intent = new Intent(context, MainActivity.class);
-                                    context.startActivity(intent);
+                                    context.finish();
+                                    MainActivity.restartGame();
                                 }
                             })
                             .setIcon(android.R.drawable.ic_dialog_info)
