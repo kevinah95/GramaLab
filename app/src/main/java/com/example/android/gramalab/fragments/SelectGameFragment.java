@@ -61,19 +61,19 @@ public class SelectGameFragment extends Fragment implements View.OnClickListener
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
-            btnSelectGameComplete.setVisibility(View.INVISIBLE);
-            btnSelectGameCorrect.setVisibility(View.INVISIBLE);
-            btnSelectGameFractionate.setVisibility(View.INVISIBLE);
-            btnSelectGameIdentify.setVisibility(View.INVISIBLE);
-            btnSelectGameOrder.setVisibility(View.INVISIBLE);
+            btnSelectGameComplete.setVisibility(View.GONE);
+            btnSelectGameCorrect.setVisibility(View.GONE);
+            btnSelectGameFractionate.setVisibility(View.GONE);
+            btnSelectGameIdentify.setVisibility(View.GONE);
+            btnSelectGameOrder.setVisibility(View.GONE);
 
             if (MainActivity.isFirstLevel) {
-                buttonsAnimation.showAnimation(btnSelectGameComplete, buttonsAnimation.animTranslateYInverted);
-                buttonsAnimation.showAnimation(btnSelectGameIdentify, buttonsAnimation.animTranslate);
-                buttonsAnimation.showAnimation(btnSelectGameCorrect, buttonsAnimation.animTranslateY);
+                btnSelectGameComplete.setVisibility(View.VISIBLE);
+                btnSelectGameCorrect.setVisibility(View.VISIBLE);
+                btnSelectGameIdentify.setVisibility(View.VISIBLE);
             } else {
-                buttonsAnimation.showAnimation(btnSelectGameOrder, buttonsAnimation.animTranslateInverted);
-                buttonsAnimation.showAnimation(btnSelectGameFractionate, buttonsAnimation.animTranslate);
+                btnSelectGameOrder.setVisibility(View.VISIBLE);
+                btnSelectGameFractionate.setVisibility(View.VISIBLE);
             }
         }
     }
@@ -140,7 +140,7 @@ public class SelectGameFragment extends Fragment implements View.OnClickListener
                 switch (v.getId()) {
                     case R.id.btn_select_game_complete:
                         if(MainActivity.isCompletePlayed) {
-                            Toast.makeText(MainActivity.context, "Ya jugaste este juego, seleciona otro", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.context, "Ya jugaste este juego, seleccioná otro", Toast.LENGTH_SHORT).show();
                         }
                         else {
                             MainActivity.isCompletePlayed = true;
@@ -150,7 +150,7 @@ public class SelectGameFragment extends Fragment implements View.OnClickListener
                         break;
                     case R.id.btn_select_game_correct:
                         if (MainActivity.isCorrectPlayed) {
-                            Toast.makeText(MainActivity.context, "Ya jugaste este juego, seleciona otro", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.context, "Ya jugaste este juego, seleccioná otro", Toast.LENGTH_SHORT).show();
                         }
                         else {
                             MainActivity.isCorrectPlayed = true;
@@ -160,7 +160,7 @@ public class SelectGameFragment extends Fragment implements View.OnClickListener
                         break;
                     case R.id.btn_select_game_fractionate:
                         if(MainActivity.isDividePlayed) {
-                            Toast.makeText(MainActivity.context, "Ya jugaste este juego, seleciona otro", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.context, "Ya jugaste este juego, seleccioná otro", Toast.LENGTH_SHORT).show();
                         }
                         else {
                             MainActivity.isDividePlayed = true;
@@ -170,7 +170,7 @@ public class SelectGameFragment extends Fragment implements View.OnClickListener
                         break;
                     case R.id.btn_select_game_identify:
                         if(MainActivity.isIdentifyPlayed) {
-                            Toast.makeText(MainActivity.context, "Ya jugaste este juego, seleciona otro", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.context, "Ya jugaste este juego, seleccioná otro", Toast.LENGTH_SHORT).show();
                         }
                         else {
                             MainActivity.isIdentifyPlayed = true;
@@ -180,7 +180,7 @@ public class SelectGameFragment extends Fragment implements View.OnClickListener
                         break;
                     case R.id.btn_select_game_order:
                         if(MainActivity.isOrderPlayed){
-                            Toast.makeText(MainActivity.context, "Ya jugaste este juego, seleciona otro", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.context, "Ya jugaste este juego, seleccioná otro", Toast.LENGTH_SHORT).show();
                         }
                         else {
                             MainActivity.isOrderPlayed = true;

@@ -35,7 +35,7 @@
                 android:layout_marginTop="10dp"
                 android:background="#00000000"
                 android:src="@drawable/btn_select_game_complete"
-                android:visibility="invisible"
+                android:visibility="gone"
                 android:layout_gravity="center_horizontal" />
 
             <ImageButton
@@ -47,7 +47,7 @@
                 android:layout_marginBottom="5dp"
                 android:background="#00000000"
                 android:src="@drawable/btn_select_game_identify"
-                android:visibility="invisible" />
+                android:visibility="gone" />
 
             <ImageButton
                 android:id="@+id/btn_select_game_order"
@@ -58,7 +58,7 @@
                 android:layout_marginBottom="5dp"
                 android:background="#00000000"
                 android:src="@drawable/btn_select_game_order"
-                android:visibility="invisible" />
+                android:visibility="gone" />
 
             <ImageButton
                 android:id="@+id/btn_select_game_fractionate"
@@ -69,7 +69,7 @@
                 android:layout_marginBottom="5dp"
                 android:background="#00000000"
                 android:src="@drawable/btn_select_game_fractionate"
-                android:visibility="invisible" />
+                android:visibility="gone" />
 
             <ImageButton
                 android:id="@+id/btn_select_game_correct"
@@ -80,7 +80,7 @@
                 android:layout_marginBottom="10dp"
                 android:background="#00000000"
                 android:src="@drawable/btn_select_game_correct"
-                android:visibility="invisible" />
+                android:visibility="gone" />
         </LinearLayout>
     </RelativeLayout>
 
