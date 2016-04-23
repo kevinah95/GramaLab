@@ -39,7 +39,7 @@ public class Timer
 
             public void onFinish()
             {
-                if(MainActivity.isCompletePlayed && MainActivity.isIdentifyPlayed && MainActivity.isDividePlayed && MainActivity.isOrderPlayed && MainActivity.isCorrectPlayed)
+                if( (MainActivity.isCompletePlayed && MainActivity.isIdentifyPlayed && MainActivity.isCorrectPlayed) || (MainActivity.isDividePlayed && MainActivity.isOrderPlayed))
                 {
                     MainActivity.isCompletePlayed = false;
                     MainActivity.isIdentifyPlayed = false;
