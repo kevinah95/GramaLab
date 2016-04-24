@@ -68,6 +68,15 @@ public class IdentifyGameActivity extends AppCompatActivity
         identifyGames.add(new IdentifyGame("Correr", "Verbo"));
         identifyGames.add(new IdentifyGame("Casa", "Sustantivo"));
         identifyGames.add(new IdentifyGame("El","Articulo"));
+        identifyGames.add(new IdentifyGame("Nadar", "Verbo"));
+        identifyGames.add(new IdentifyGame("Laptop", "Sustantivo"));
+        identifyGames.add(new IdentifyGame("Ella","Articulo"));
+        identifyGames.add(new IdentifyGame("Comer", "Verbo"));
+        identifyGames.add(new IdentifyGame("Mariana", "Sustantivo"));
+        identifyGames.add(new IdentifyGame("Ellos","Articulo"));
+        identifyGames.add(new IdentifyGame("Caminar", "Verbo"));
+        identifyGames.add(new IdentifyGame("Carro", "Sustantivo"));
+        identifyGames.add(new IdentifyGame("Ellas","Articulo"));
         //Aqui termina el ciclo
         absoluteLayout = (AbsoluteLayout) findViewById(R.id.abs_layout);
         relativeLayout = (RelativeLayout) findViewById(R.id.rel_layout);

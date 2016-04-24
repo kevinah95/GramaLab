@@ -72,6 +72,9 @@ public class DivideGameActivity extends AppCompatActivity
         divideGames.add(new DivideGame("atleta", "a tle ta", 3));
         divideGames.add(new DivideGame("corazón", "co ra zón", 3));
         divideGames.add(new DivideGame("módulo","mó du lo", 3));
+        divideGames.add(new DivideGame("camisa", "ca mi sa", 3));
+        divideGames.add(new DivideGame("pregunta", "pre gun ta", 3));
+        divideGames.add(new DivideGame("escuela","es cue la", 3));
         //Aqui termina el ciclo
 
         context = this;

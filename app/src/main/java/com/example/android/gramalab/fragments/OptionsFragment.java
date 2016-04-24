@@ -14,6 +14,7 @@ import android.widget.ImageButton;
 import com.example.android.gramalab.R;
 import com.example.android.gramalab.activities.MainActivity;
 import com.example.android.gramalab.dialogs.ViewDialog;
+import com.example.android.gramalab.dialogs.ViewDialogLevel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,6 +29,7 @@ public class OptionsFragment extends Fragment {
     private View view;
 
     private ImageButton btnAbout;
+    private ImageButton btnLevel;
     private CheckBox checkBoxMusic;
 
     public OptionsFragment() {
@@ -62,6 +64,15 @@ public class OptionsFragment extends Fragment {
                     // ("Un-Checked");
                     MainActivity.mainScreenSound.stop();
                 }
+            }
+        });
+
+        btnLevel = (ImageButton) view.findViewById(R.id.btn_level);
+        btnLevel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ViewDialogLevel alert = new ViewDialogLevel();
+                alert.showDialog(getActivity());
             }
         });
 

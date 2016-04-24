@@ -67,8 +67,10 @@ public class CompleteGameActivity extends AppCompatActivity
         Aqui haria como un ciclo donde agrega a completeGames lo que haya en la base de datos
         */
         completeGames.add(new CompleteGame("Rodrigo [Verbo] todo el día", "Verbo/Presente: Correr", "corre"));
-        completeGames.add(new CompleteGame("Carlos esta [Verbo] en este momento", "Verbo/Gerundio: Nadar", "nadando"));
+        completeGames.add(new CompleteGame("Carlos está [Verbo] en este momento", "Verbo/Gerundio: Nadar", "nadando"));
         completeGames.add(new CompleteGame("Tienen que [Verbo] mucho para este examen","Verbo/Infinitivo: Estudiar","estudiar"));
+        completeGames.add(new CompleteGame("Fabián [Verbo] mucho la fiesta", "Verbo/Presente: Disfrutar", "disfruta"));
+        completeGames.add(new CompleteGame("Jasson [Verbo] muy poco ayer","Verbo/Pasado: Dormir","durmió"));
         //Aqui termina el ciclo
 
         //Cosas de Diseño

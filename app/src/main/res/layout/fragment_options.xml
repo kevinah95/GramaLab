@@ -49,6 +49,14 @@
         </RelativeLayout>
 
         <ImageButton
+            android:id="@+id/btn_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/btn_level"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="5dp"
+            android:background="#00000000"/>
+        <ImageButton
             android:id="@+id/btn_about"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

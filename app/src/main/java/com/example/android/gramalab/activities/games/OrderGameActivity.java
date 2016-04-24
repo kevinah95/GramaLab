@@ -57,6 +57,9 @@ public class OrderGameActivity extends AppCompatActivity
         orderGames.add(new OrderGame("Dicen que hay mucha comida"));
         orderGames.add(new OrderGame("Vamos para allá"));
         orderGames.add(new OrderGame("Pregunte si hay sal"));
+        orderGames.add(new OrderGame("Estamos programando mucho"));
+        orderGames.add(new OrderGame("Ese hombre se enojó"));
+        orderGames.add(new OrderGame("Me gusta mucho esta fiesta"));
         //Aqui termina el ciclo
         gridViewSentence = (GridLayout) findViewById(R.id.gridViewSentence);
         gridViewAnswer = (GridLayout) findViewById(R.id.gridViewAnswer);

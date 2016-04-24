@@ -67,7 +67,7 @@ public class SelectGameFragment extends Fragment implements View.OnClickListener
             btnSelectGameIdentify.setVisibility(View.GONE);
             btnSelectGameOrder.setVisibility(View.GONE);
 
-            if (MainActivity.isFirstLevel) {
+            if (!MainActivity.isFirstLevel) {
                 btnSelectGameComplete.setVisibility(View.VISIBLE);
                 btnSelectGameCorrect.setVisibility(View.VISIBLE);
                 btnSelectGameIdentify.setVisibility(View.VISIBLE);

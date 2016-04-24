@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements
 
     public static Activity context;
     public static String scoreText = "Puntaje: ";
-    public static int gameSeconds = 10;
+    public static int gameSeconds = 30;
     public static int score;
     public static boolean isFirstLevel = false;
 
