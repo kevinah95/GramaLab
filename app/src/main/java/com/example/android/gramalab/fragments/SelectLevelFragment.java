@@ -56,6 +56,9 @@ public class SelectLevelFragment extends Fragment implements View.OnClickListene
                 instance = this;
                 buttonsAnimation.showAnimation(btnSelectLevelFirstCycle, buttonsAnimation.animTranslate);
                 buttonsAnimation.showAnimation(btnSelectLevelSecondCycle, buttonsAnimation.animTranslateInverted);
+            } else {
+                btnSelectLevelFirstCycle.setVisibility(View.VISIBLE);
+                btnSelectLevelSecondCycle.setVisibility(View.VISIBLE);
             }
             Log.d("MyFragment", "Fragment is visible.");
     }

@@ -71,6 +71,7 @@ public class IdentifyGameActivity extends AppCompatActivity
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         animBtnGame = AnimationUtils.loadAnimation(this, R.anim.anim_translate_x_infinite);
+
         try {
             String query = String.format("Table=%s", URLEncoder.encode("Identify", MainActivity.charset));
 
