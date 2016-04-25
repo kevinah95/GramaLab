@@ -18,13 +18,22 @@ import android.widget.Toast;
 
 import com.example.android.gramalab.R;
 import com.example.android.gramalab.activities.MainActivity;
+import com.example.android.gramalab.logic.DivideGame;
 import com.example.android.gramalab.logic.IdentifyGame;
+import com.example.android.gramalab.utils.Server;
 import com.example.android.gramalab.utils.Timer;
 import com.example.android.gramalab.views.games.DrawTextView;
 import com.example.android.gramalab.views.games.DrawVectorView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.ExecutionException;
 
 public class IdentifyGameActivity extends AppCompatActivity
 {
@@ -62,74 +71,91 @@ public class IdentifyGameActivity extends AppCompatActivity
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         animBtnGame = AnimationUtils.loadAnimation(this, R.anim.anim_translate_x_infinite);
-        /*
-        Aqui haria como un ciclo donde agrega a identifyGames lo que haya en la base de datos
-        */
-        identifyGames.add(new IdentifyGame("Correr", "Verbo"));
-        identifyGames.add(new IdentifyGame("Casa", "Sustantivo"));
-        identifyGames.add(new IdentifyGame("El","Articulo"));
-        //Aqui termina el ciclo
-        absoluteLayout = (AbsoluteLayout) findViewById(R.id.abs_layout);
-        relativeLayout = (RelativeLayout) findViewById(R.id.rel_layout);
+        try {
+            String query = String.format("Table=%s", URLEncoder.encode("Identify", MainActivity.charset));
 
-        wordBox = new DrawVectorView(this);
-        wordBox.prepareCanvas(R.drawable.rectangle_game_identify);
-        wordBox.setWIDTH_POSITON_PORCENTAGE(0.85f);
-        wordBox.setHEIGHT_POSITON_PORCENTAGE(0.60f);
-        wordBox.setVECTOR_SCALABLE_PORCENTAGE(0.70f);
+            JSONArray responseJSON = new Server().execute(MainActivity.ipAdress, query).get();
 
-        absoluteLayout.addView(wordBox);
-        context = this;
-        new CountDownTimer(2000, 1) {
-            public void onFinish() {
-                wordBoxWidth = wordBox.getCanvasWidth();
-                wordBoxMinWidth = wordBox.getCanvasX();
-                triesTextView.bringToFront();
-                setGame();
-                relativeLayout.setVisibility(View.INVISIBLE);
-                new Timer(MainActivity.gameSeconds, context);
+            if (responseJSON != null && responseJSON.length() > 0) {
+                identifyGames.clear();
+                JSONObject jsonObject;
+                for (int i = 0; i < responseJSON.length(); i++) {
+                    jsonObject = responseJSON.getJSONObject(i);
+                    identifyGames.add(new IdentifyGame(jsonObject.getString("Word"), jsonObject.getString("Type")));
+                }
+
+                absoluteLayout = (AbsoluteLayout) findViewById(R.id.abs_layout);
+                relativeLayout = (RelativeLayout) findViewById(R.id.rel_layout);
+
+                wordBox = new DrawVectorView(this);
+                wordBox.prepareCanvas(R.drawable.rectangle_game_identify);
+                wordBox.setWIDTH_POSITON_PORCENTAGE(0.85f);
+                wordBox.setHEIGHT_POSITON_PORCENTAGE(0.60f);
+                wordBox.setVECTOR_SCALABLE_PORCENTAGE(0.70f);
+
+                absoluteLayout.addView(wordBox);
+
+                triesTextView = (TextView) findViewById(R.id.triesTextViewIdentify);
+
+                buttonArticle = (ImageButton) findViewById(R.id.article_btn);
+                buttonAdjective = (ImageButton) findViewById(R.id.adjective_btn);
+                buttonNoun = (ImageButton) findViewById(R.id.noun_btn);
+                buttonVerb = (ImageButton) findViewById(R.id.verb_btn);
+
+                buttonVerb.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        checkAnswer("Verbo");
+                    }
+                });
+                buttonNoun.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        checkAnswer("Sustantivo");
+                    }
+                });
+                buttonAdjective.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        checkAnswer("Adjetivo");
+                    }
+                });
+                buttonArticle.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        checkAnswer("Articulo");
+                    }
+                });
+
+                context = this;
+                new CountDownTimer(2000, 1) {
+                    public void onFinish() {
+                        wordBoxWidth = wordBox.getCanvasWidth();
+                        wordBoxMinWidth = wordBox.getCanvasX();
+                        triesTextView.bringToFront();
+                        relativeLayout.setVisibility(View.INVISIBLE);
+                        new Timer(MainActivity.gameSeconds, context);
+                        setGame();
+                    }
+
+                    public void onTick(long millisUntilFinished) {
+                    }
+                }.start();
             }
-            public void onTick(long millisUntilFinished) {}
-        }.start();
-
-//        answerEditText = (EditText)findViewById(R.id.wordEditTextIdentity);
-        triesTextView = (TextView)findViewById(R.id.triesTextViewIdentify);
-
-        buttonArticle = (ImageButton) findViewById(R.id.article_btn);
-        buttonAdjective = (ImageButton) findViewById(R.id.adjective_btn);
-        buttonNoun = (ImageButton) findViewById(R.id.noun_btn);
-        buttonVerb = (ImageButton) findViewById(R.id.verb_btn);
-
-        buttonVerb.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
+            else
             {
-                checkAnswer("Verbo");
+                Toast.makeText(this, "Problema de conexión, no se puede acceder a la base de datos", Toast.LENGTH_LONG).show();
+                finish();
             }
-        });
-        buttonNoun.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                checkAnswer("Sustantivo");
-            }
-        });
-        buttonAdjective.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                checkAnswer("Adjetivo");
-            }
-        });
-        buttonArticle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkAnswer("Articulo");
-            }
-        });
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -145,7 +171,7 @@ public class IdentifyGameActivity extends AppCompatActivity
 
     void setGame()
     {
-        actualGame = identifyGames.get(new Random().nextInt(identifyGames.size()));
+        actualGame = identifyGames.get((int) (identifyGames.size() * Math.random()));
         if(wordTextBox == null)
             wordTextBox = new DrawTextView(this);
         else

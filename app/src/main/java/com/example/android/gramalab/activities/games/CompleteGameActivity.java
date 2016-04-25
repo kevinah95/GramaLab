@@ -19,12 +19,19 @@ import android.widget.Toast;
 import com.example.android.gramalab.R;
 import com.example.android.gramalab.activities.MainActivity;
 import com.example.android.gramalab.logic.CompleteGame;
+import com.example.android.gramalab.utils.Server;
 import com.example.android.gramalab.utils.Timer;
 import com.example.android.gramalab.views.games.DrawTextView;
 import com.example.android.gramalab.views.games.DrawVectorView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.Random;
+import java.util.concurrent.ExecutionException;
 
 
 public class CompleteGameActivity extends AppCompatActivity
@@ -63,61 +70,72 @@ public class CompleteGameActivity extends AppCompatActivity
 
         animBtn = AnimationUtils.loadAnimation(this, R.anim.btn_scale);
 
-        /*
-        Aqui haria como un ciclo donde agrega a completeGames lo que haya en la base de datos
-        */
-        completeGames.add(new CompleteGame("Rodrigo [Verbo] todo el día", "Verbo/Presente: Correr", "corre"));
-        completeGames.add(new CompleteGame("Carlos esta [Verbo] en este momento", "Verbo/Gerundio: Nadar", "nadando"));
-        completeGames.add(new CompleteGame("Tienen que [Verbo] mucho para este examen","Verbo/Infinitivo: Estudiar","estudiar"));
-        //Aqui termina el ciclo
+        try {
+            String query = String.format("Table=%s", URLEncoder.encode("Complete", MainActivity.charset));
 
-        //Cosas de Diseño
-        //drawVector(sentenceBox, R.id.cloud_box, 0.945f, 0.85f, 0.90f, "Sentence");
-        //drawVector(wordTextBox, R.id.tense_box, 0.60f, 0.53f, 0.50f, "Word");
+            JSONArray responseJSON = new Server().execute(MainActivity.ipAdress, query).get();
 
-        checkButton = (ImageButton) findViewById(R.id.btn_check_answer);
+            if (responseJSON != null && responseJSON.length() > 0) {
+                completeGames.clear();
+                JSONObject jsonObject;
+                for (int i = 0; i < responseJSON.length(); i++) {
+                    jsonObject = responseJSON.getJSONObject(i);
+                    completeGames.add(new CompleteGame(jsonObject.getString("Sentence"), jsonObject.getString("Word"), jsonObject.getString("Answer")));
+                }
 
-        relativeLayout = (RelativeLayout) findViewById(R.id.rel_layout);
-        absoluteLayout = (AbsoluteLayout) findViewById(R.id.abs_layout);
+                checkButton = (ImageButton) findViewById(R.id.btn_check_answer);
 
-        sentenceBox = new DrawVectorView(this);
-        sentenceBox.prepareCanvas(R.drawable.game_complete_cloud);
-        sentenceBox.setWIDTH_POSITON_PORCENTAGE(0.945f);
-        sentenceBox.setHEIGHT_POSITON_PORCENTAGE(0.85f);
-        sentenceBox.setVECTOR_SCALABLE_PORCENTAGE(0.90f);
+                relativeLayout = (RelativeLayout) findViewById(R.id.rel_layout);
+                absoluteLayout = (AbsoluteLayout) findViewById(R.id.abs_layout);
 
-        wordTextBox = new DrawVectorView(this);
-        wordTextBox.prepareCanvas(R.drawable.game_complete_tense);
-        wordTextBox.setWIDTH_POSITON_PORCENTAGE(0.60f);
-        wordTextBox.setHEIGHT_POSITON_PORCENTAGE(0.53f);
-        wordTextBox.setVECTOR_SCALABLE_PORCENTAGE(0.50f);
+                sentenceBox = new DrawVectorView(this);
+                sentenceBox.prepareCanvas(R.drawable.game_complete_cloud);
+                sentenceBox.setWIDTH_POSITON_PORCENTAGE(0.945f);
+                sentenceBox.setHEIGHT_POSITON_PORCENTAGE(0.85f);
+                sentenceBox.setVECTOR_SCALABLE_PORCENTAGE(0.90f);
 
-        absoluteLayout.addView(sentenceBox);
-        absoluteLayout.addView(wordTextBox);
+                wordTextBox = new DrawVectorView(this);
+                wordTextBox.prepareCanvas(R.drawable.game_complete_tense);
+                wordTextBox.setWIDTH_POSITON_PORCENTAGE(0.60f);
+                wordTextBox.setHEIGHT_POSITON_PORCENTAGE(0.53f);
+                wordTextBox.setVECTOR_SCALABLE_PORCENTAGE(0.50f);
 
-        context = this;
-        //////------------------------- Aquí se deben esperar al menos 1 segundo antes de cargar el juego, para poder calcular posiciones y dimensiones-------------------//////////////
-        new CountDownTimer(2000, 1) {
-            public void onFinish() {
-                sentenceBoxWidth = sentenceBox.getCanvasWidth();
-                sentenceBoxMinWidth = sentenceBox.getCanvasX();
-                wordTextBoxWidth = wordTextBox.getCanvasWidth();
-                wordTextBoxMinWidth = wordTextBox.getCanvasX();
-                setGame();
-                relativeLayout.setVisibility(View.INVISIBLE);
-                new Timer(MainActivity.gameSeconds, context);
+                absoluteLayout.addView(sentenceBox);
+                absoluteLayout.addView(wordTextBox);
+
+                context = this;
+
+                new CountDownTimer(2000, 1) {
+                    public void onFinish() {
+                        sentenceBoxWidth = sentenceBox.getCanvasWidth();
+                        sentenceBoxMinWidth = sentenceBox.getCanvasX();
+                        wordTextBoxWidth = wordTextBox.getCanvasWidth();
+                        wordTextBoxMinWidth = wordTextBox.getCanvasX();
+                        setGame();
+                        relativeLayout.setVisibility(View.INVISIBLE);
+                        new Timer(MainActivity.gameSeconds, context);
+                    }
+
+                    public void onTick(long millisUntilFinished) {
+                    }
+                }.start();
+
+                answerEditText = (EditText) findViewById(R.id.answer_edit_Text);
+                triesTextView = (TextView) findViewById(R.id.triesTextViewComplete);
+            } else {
+                Toast.makeText(this, "Problema de conexión, no se puede acceder a la base de datos", Toast.LENGTH_LONG).show();
+                finish();
             }
-            public void onTick(long millisUntilFinished) {}
-        }.start();
-        //drawText(sentenceText, R.id.sentence_text, "Aquí va el texto", "Dosis-Regular.ttf", 80, 0.945f, 0.79f, true);
-        //sentenceEditText = (EditText)findViewById(R.id.sentenceEditTextComplete);
-        //wordTextView = (TextView)findViewById(R.id.wordTextViewComplete);
-        answerEditText = (EditText)findViewById(R.id.answer_edit_Text);
-        triesTextView = (TextView)findViewById(R.id.triesTextViewComplete);
-        //sentenceEditText.setKeyListener(null);
-
+        } catch (InterruptedException e) {
+            Toast.makeText(this, "Error: " + e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+        } catch (ExecutionException e) {
+            Toast.makeText(this, "Error: " + e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+        } catch (UnsupportedEncodingException e) {
+            Toast.makeText(this, "Error: " + e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+        } catch (JSONException e) {
+            Toast.makeText(this, "Error: " + e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+        }
     }
-
     /**
      * Change Screen Mode: IMMERSIVE http://developer.android.com/intl/es/training/system-ui/immersive.html
      *
@@ -136,7 +154,7 @@ public class CompleteGameActivity extends AppCompatActivity
 
     void setGame()
     {
-        CompleteGame completeGame = completeGames.get(new Random().nextInt(completeGames.size()));
+        CompleteGame completeGame = completeGames.get((int) (completeGames.size() * Math.random()));
         if(sentenceText == null || tenceText == null) {
             sentenceText = new DrawTextView(this);
             tenceText = new DrawTextView(this);

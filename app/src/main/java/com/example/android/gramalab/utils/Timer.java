@@ -49,6 +49,7 @@ public class Timer
 
                     new AlertDialog.Builder(context)
                             .setTitle("Fin del juego")
+                            .setCancelable(false)
                             .setMessage("Puntuación final: " + MainActivity.score)
                             .setPositiveButton("Volver a jugar", new DialogInterface.OnClickListener()
                             {

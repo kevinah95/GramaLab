@@ -18,15 +18,25 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.android.gramalab.R;
 import com.example.android.gramalab.activities.MainActivity;
+import com.example.android.gramalab.logic.CorrectGame;
 import com.example.android.gramalab.logic.DivideGame;
+import com.example.android.gramalab.utils.Server;
 import com.example.android.gramalab.utils.Timer;
 import com.example.android.gramalab.views.games.DrawTextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by jasc9 on 22/4/2016.
@@ -66,26 +76,48 @@ public class DivideGameActivity extends AppCompatActivity
         Point size = new Point();
         display.getSize(size);
         screenWidth = size.x;
-        /*
-        Aqui haria como un ciclo donde agrega a divideGames lo que haya en la base de datos
-        */
-        divideGames.add(new DivideGame("atleta", "a tle ta", 3));
-        divideGames.add(new DivideGame("corazón", "co ra zón", 3));
-        divideGames.add(new DivideGame("módulo","mó du lo", 3));
-        //Aqui termina el ciclo
 
-        context = this;
-        new CountDownTimer(2000, 1) {
-            public void onFinish() {
-                relativeLayout.setVisibility(View.INVISIBLE);
-                new Timer(MainActivity.gameSeconds, context);
+        try {
+            String query = String.format("Table=%s", URLEncoder.encode("Divide", MainActivity.charset));
+
+            JSONArray responseJSON = new Server().execute(MainActivity.ipAdress, query).get();
+
+            if (responseJSON != null && responseJSON.length() > 0) {
+                divideGames.clear();
+                JSONObject jsonObject;
+                for (int i = 0; i < responseJSON.length(); i++) {
+                    jsonObject = responseJSON.getJSONObject(i);
+                    divideGames.add(new DivideGame(jsonObject.getString("Word"), jsonObject.getString("DividedWord"), jsonObject.getInt("WordLen")));
+                }
+
+                triesTextView = (TextView) findViewById(R.id.triesTextViewDivide);
+
+                context = this;
+                new CountDownTimer(2000, 1) {
+                    public void onFinish() {
+                        relativeLayout.setVisibility(View.INVISIBLE);
+                        new Timer(MainActivity.gameSeconds, context);
+                        setGame();
+                    }
+
+                    public void onTick(long millisUntilFinished) {
+                    }
+                }.start();
             }
-            public void onTick(long millisUntilFinished) {}
-        }.start();
-
-        triesTextView = (TextView)findViewById(R.id.triesTextViewDivide);
-
-        setGame();
+            else
+            {
+                Toast.makeText(this, "Problema de conexión, no se puede acceder a la base de datos", Toast.LENGTH_LONG).show();
+                finish();
+            }
+        } catch (InterruptedException e) {
+            Toast.makeText(this, "Error: " + e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+        } catch (ExecutionException e) {
+            Toast.makeText(this, "Error: " + e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+        } catch (UnsupportedEncodingException e) {
+            Toast.makeText(this, "Error: " + e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+        } catch (JSONException e) {
+            Toast.makeText(this, "Error: " + e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
@@ -99,11 +131,10 @@ public class DivideGameActivity extends AppCompatActivity
         }
     }
 
-
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     void setGame()
     {
-        actualGame = divideGames.get(new Random().nextInt(divideGames.size()));
+        actualGame = divideGames.get((int) (divideGames.size() * Math.random()));
         EditText editText;
         if(wordBox == null) {
             wordBox = new DrawTextView(this);

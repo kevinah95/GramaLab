@@ -1,7 +1,5 @@
 package com.example.android.gramalab.logic;
 
-import java.util.ArrayList;
-
 public class IdentifyGame
 {
     private String _Word;

@@ -1,39 +1,45 @@
 package com.example.android.gramalab.logic;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * Created by jasc9 on 22/4/2016.
  */
 public class CorrectGame
 {
-    private String _WrongSentence;
-    private String _CorrectSentece;
+    private String _Sentence;
+    private ArrayList<String> _Words;
+    private String _CorrectWord;
 
-    public CorrectGame(String _WrongSentence, String _CorrectSentece) {
-        this._WrongSentence = _WrongSentence;
-        this._CorrectSentece = _CorrectSentece;
+    public CorrectGame(String _Sentence, String _Words, String _CorrectWord)
+    {
+        this._Sentence = _Sentence;
+        this._Words = new ArrayList<>(Arrays.asList(_Words.split(" ")));
+        this._CorrectWord = _CorrectWord;
     }
 
-    public String get_WrongSentence() {
-        return _WrongSentence;
+    public String get_Sentence() {
+        return _Sentence;
     }
 
-    public void set_WrongSentence(String _WrongSentence) {
-        this._WrongSentence = _WrongSentence;
+    public void set_Sentence(String _Sentence) {
+        this._Sentence = _Sentence;
     }
 
-    public String get_CorrectSentece() {
-        return _CorrectSentece;
+    public ArrayList<String> get_Words() {
+        return _Words;
+    }
+
+    public void set_Words(ArrayList<String> _Words) {
+        this._Words = _Words;
+    }
+
+    public String get_CorrectWord() {
+        return _CorrectWord;
     }
 
     public void set_CorrectSentece(String _CorrectSentece) {
-        this._CorrectSentece = _CorrectSentece;
-    }
-
-    boolean isCorrect(String pAnswer)
-    {
-        if(pAnswer.matches(this._CorrectSentece))
-            return true;
-        else
-            return false;
+        this._CorrectWord = _CorrectSentece;
     }
 }
