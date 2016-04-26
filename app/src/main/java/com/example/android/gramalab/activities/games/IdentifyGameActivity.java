@@ -4,12 +4,15 @@ import android.app.Activity;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AbsoluteLayout;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -54,10 +57,10 @@ public class IdentifyGameActivity extends AppCompatActivity
     EditText answerEditText;
     TextView triesTextView;
 
-    ImageButton buttonNoun;
-    ImageButton buttonVerb;
-    ImageButton buttonAdjective;
-    ImageButton buttonArticle;
+    DrawVectorView buttonNoun;
+    DrawVectorView buttonVerb;
+    DrawVectorView buttonAdjective;
+    DrawVectorView buttonArticle;
     Activity context;
 
     int sucessValue = 1;
@@ -98,33 +101,62 @@ public class IdentifyGameActivity extends AppCompatActivity
 
                 triesTextView = (TextView) findViewById(R.id.triesTextViewIdentify);
 
-                buttonArticle = (ImageButton) findViewById(R.id.article_btn);
-                buttonAdjective = (ImageButton) findViewById(R.id.adjective_btn);
-                buttonNoun = (ImageButton) findViewById(R.id.noun_btn);
-                buttonVerb = (ImageButton) findViewById(R.id.verb_btn);
+                buttonArticle = new DrawVectorView(this);
+                buttonArticle.prepareCanvas(R.drawable.btn_game_identify_article);
+                buttonArticle.setWIDTH_POSITON_PORCENTAGE(0.745f);
+                buttonArticle.setHEIGHT_POSITON_PORCENTAGE(0.35f);
+                buttonArticle.setVECTOR_SCALABLE_PORCENTAGE(0.50f);
+                buttonArticle.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT));
+                absoluteLayout.addView(buttonArticle);
 
-                buttonVerb.setOnClickListener(new View.OnClickListener() {
+                buttonAdjective = new DrawVectorView(this);
+                buttonAdjective.prepareCanvas(R.drawable.btn_game_identify_adjective);
+                buttonAdjective.setWIDTH_POSITON_PORCENTAGE(0.745f);
+                buttonAdjective.setHEIGHT_POSITON_PORCENTAGE(0.26f);
+                buttonAdjective.setVECTOR_SCALABLE_PORCENTAGE(0.50f);
+                buttonAdjective.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT));
+                absoluteLayout.addView(buttonAdjective);
+
+                buttonNoun = new DrawVectorView(this);
+                buttonNoun.prepareCanvas(R.drawable.btn_game_identify_noun);
+                buttonNoun.setWIDTH_POSITON_PORCENTAGE(0.745f);
+                buttonNoun.setHEIGHT_POSITON_PORCENTAGE(0.17f);
+                buttonNoun.setVECTOR_SCALABLE_PORCENTAGE(0.50f);
+                buttonNoun.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT));
+                absoluteLayout.addView(buttonNoun);
+
+                buttonVerb = new DrawVectorView(this);
+                buttonVerb.prepareCanvas(R.drawable.btn_game_identify_verb);
+                buttonVerb.setWIDTH_POSITON_PORCENTAGE(0.745f);
+                buttonVerb.setHEIGHT_POSITON_PORCENTAGE(0.08f);
+                buttonVerb.setVECTOR_SCALABLE_PORCENTAGE(0.50f);
+                buttonVerb.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT));
+                absoluteLayout.addView(buttonVerb);
+
+
+                buttonVerb.setOnTouchListener(new View.OnTouchListener() {
                     @Override
-                    public void onClick(View v) {
-                        checkAnswer("Verbo");
-                    }
-                });
-                buttonNoun.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        checkAnswer("Sustantivo");
-                    }
-                });
-                buttonAdjective.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        checkAnswer("Adjetivo");
-                    }
-                });
-                buttonArticle.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        checkAnswer("Articulo");
+                    public boolean onTouch(View v, MotionEvent event) {
+                        int x = (int) event.getX();
+                        int y = (int) event.getY();
+                        switch (event.getAction()) {
+                            case MotionEvent.ACTION_DOWN:
+                                Log.d("MY X", " " + x);
+                                if (x > buttonVerb.getCanvasX() && x < (buttonVerb.getCanvasX() + buttonVerb.getCanvasWidth()) && y > buttonVerb.getCanvasY() && y < (buttonVerb.getCanvasY() + buttonVerb.getCanvasHeight()))
+                                    checkAnswer("Verbo");
+                                else if (x > buttonArticle.getCanvasX() && x < (buttonArticle.getCanvasX() + buttonArticle.getCanvasWidth()) && y > buttonArticle.getCanvasY() && y < (buttonArticle.getCanvasY() + buttonArticle.getCanvasHeight()))
+                                    checkAnswer("Articulo");
+                                else if (x > buttonNoun.getCanvasX() && x < (buttonNoun.getCanvasX() + buttonNoun.getCanvasWidth()) && y > buttonNoun.getCanvasY() && y < (buttonNoun.getCanvasY() + buttonNoun.getCanvasHeight()))
+                                    checkAnswer("Sustantivo");
+                                else if (x > buttonAdjective.getCanvasX() && x < (buttonAdjective.getCanvasX() + buttonAdjective.getCanvasWidth()) && y > buttonAdjective.getCanvasY() && y < (buttonAdjective.getCanvasY() + buttonAdjective.getCanvasHeight()))
+                                    checkAnswer("Adjetivo");
+                                break;
+                            case MotionEvent.ACTION_MOVE:
+                                break;
+                            case MotionEvent.ACTION_UP:
+                                break;
+                        }
+                        return false;
                     }
                 });
 
@@ -165,7 +197,10 @@ public class IdentifyGameActivity extends AppCompatActivity
         if (hasFocus) {
             getWindow().getDecorView().setSystemUiVisibility(
                     View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                             | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
                             | View.SYSTEM_UI_FLAG_FULLSCREEN);
         }
     }
@@ -173,8 +208,9 @@ public class IdentifyGameActivity extends AppCompatActivity
     void setGame()
     {
         actualGame = identifyGames.get((int) (identifyGames.size() * Math.random()));
-        if(wordTextBox == null)
+        if(wordTextBox == null) {
             wordTextBox = new DrawTextView(this);
+        }
         else
             absoluteLayout.removeView(wordTextBox);
         wordTextBox.setText(actualGame.get_Word(), "Dosis-Regular.ttf", 80, 0.945f, 0.45f, true, 80, wordBoxWidth, wordBoxMinWidth);

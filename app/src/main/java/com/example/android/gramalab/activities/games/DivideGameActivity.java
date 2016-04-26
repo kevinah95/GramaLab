@@ -56,6 +56,7 @@ public class DivideGameActivity extends AppCompatActivity
 
     Activity context;
     int screenWidth;
+    int screenHeight;
 
     int sucessValue = 5;
     int failValue = 1;
@@ -76,6 +77,7 @@ public class DivideGameActivity extends AppCompatActivity
         Point size = new Point();
         display.getSize(size);
         screenWidth = size.x;
+        screenHeight = size.y;
 
         try {
             String query = String.format("Table=%s", URLEncoder.encode("Divide", MainActivity.charset));
@@ -146,7 +148,7 @@ public class DivideGameActivity extends AppCompatActivity
                 else
                     editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
                 editText.setSingleLine(true);
-                LinearLayout.LayoutParams editTextSize = new LinearLayout.LayoutParams(180,110);
+                LinearLayout.LayoutParams editTextSize = new LinearLayout.LayoutParams(Math.round(screenWidth * 0.20f), Math.round(screenHeight * 0.12f));
                 editText.setBackground(getResources().getDrawable(R.drawable.edit_text_custom));
                 editText.setTextSize(30);
                 editText.setLayoutParams(editTextSize);

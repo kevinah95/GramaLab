@@ -27,6 +27,8 @@ public class DrawVectorView extends View {
     private float WIDTH_POSITON_PORCENTAGE;
     private float HEIGHT_POSITON_PORCENTAGE;
     private float VECTOR_SCALABLE_PORCENTAGE;
+    private int canvasHeight;
+    private float canvasY;
 
     public DrawVectorView(Context context) {
         super(context);
@@ -63,11 +65,17 @@ public class DrawVectorView extends View {
         return this.canvasWidth;
     }
 
+    public float getCanvasHeight() {
+        return this.canvasHeight;
+    }
+
     public float getCanvasX() {
         return this.canvasX;
     }
 
-
+    public float getCanvasY() {
+        return this.canvasY;
+    }
 
     @Override
     public void onDraw(Canvas pCanvas) {
@@ -79,8 +87,10 @@ public class DrawVectorView extends View {
         int newSvgWidth = Math.round(pCanvas.getWidth() * VECTOR_SCALABLE_PORCENTAGE);
         int newSvgHeight = GraphicsUtils.calculateAspectRatio(svgWidth, newSvgWidth, svgHeight);
         canvasWidth = newSvgWidth;
+        canvasHeight = newSvgHeight;
         canvasX = canvasPosX;
-        Log.d("Parent Heigth", "" + newSvgHeight);
+        canvasY = canvasPosY;
+        Log.d("Canvas X", "" + canvasPosX);
 
         svgFromSrc.setBounds(0, 0, newSvgWidth, newSvgHeight);
         svgFromSrc.draw(pCanvas);
