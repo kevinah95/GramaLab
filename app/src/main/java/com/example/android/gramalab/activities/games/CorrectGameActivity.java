@@ -75,7 +75,7 @@ public class CorrectGameActivity extends AppCompatActivity
                 JSONObject jsonObject;
                 for (int i = 0; i < responseJSON.length(); i++) {
                     jsonObject = responseJSON.getJSONObject(i);
-                    correctGames.add(new CorrectGame(jsonObject.getString("Sentence"), jsonObject.getString("Words"), jsonObject.getString("CorrectWord")));
+                    correctGames.add(new CorrectGame(jsonObject.getString("Sentence"), jsonObject.getString("BadWord"), jsonObject.getString("CorrectWord")));
                 }
 
                 sentenceBoardBox = new DrawVectorView(this);
