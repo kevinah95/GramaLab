@@ -49,6 +49,10 @@ public class DrawTextView extends View {
         this.parentInit = pParentInit;
     }
 
+    public String getText() {
+        return this.text;
+    }
+
     @Override
     public void onDraw(Canvas pCanvas) {
         super.onDraw(pCanvas);

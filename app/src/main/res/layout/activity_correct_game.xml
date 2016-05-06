@@ -20,37 +20,9 @@
         android:id="@+id/abs_layout">
     </AbsoluteLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center">
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/answerEditTextCorrect"
-            android:imeOptions="actionDone"
-            android:singleLine="true"
-            android:textAlignment="center"
-            android:paddingTop="30dp"
-            android:hint="Escribí tu respuesta aquí"
-            android:background="@drawable/edit_text_custom"/>
-
-    </LinearLayout>
-
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/checkButtonDivide"
-            android:layout_gravity="bottom|center"
-            android:layout_marginBottom="25dp"
-            android:onClick="checkAnswer"
-            android:background="#00000000"
-            android:src="@drawable/btn_game_complete_check"/>
 
         <TextView
             android:layout_width="wrap_content"
