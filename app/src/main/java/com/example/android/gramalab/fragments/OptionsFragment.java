@@ -1,8 +1,10 @@
 package com.example.android.gramalab.fragments;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,10 +61,19 @@ public class OptionsFragment extends Fragment {
                 if(checkBoxMusic.isChecked()){
                     // ("Checked");
                     MainActivity.mainScreenSound.start();
+
                     //MainActivity.mainScreenSound.setLooping(true);
                 }else{
                     // ("Un-Checked");
-                    MainActivity.mainScreenSound.stop();
+                    MainActivity.mainScreenSound.pause();
+                    final Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            MainActivity.mainScreenSound.seekTo(0);
+                        }
+                    }, 1000);
+
                 }
             }
         });
