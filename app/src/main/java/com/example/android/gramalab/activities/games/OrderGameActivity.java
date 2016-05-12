@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.GridLayout;
@@ -42,6 +43,8 @@ public class OrderGameActivity extends AppCompatActivity
     GridLayout gridViewSentence;
     GridLayout gridViewAnswer;
     TextView triesTextView;
+
+    int lastIndex = -1;
 
     RelativeLayout relativeLayout;
 
@@ -119,7 +122,24 @@ public class OrderGameActivity extends AppCompatActivity
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     void setGame()
     {
-        actualGame = orderGames.get((int) (orderGames.size() * Math.random()));
+        String shuffledSentence = "";
+        String rightSentence = "";
+        int randomIndex = (int) (orderGames.size() * Math.random());
+
+        while(shuffledSentence.equals(rightSentence) || lastIndex == randomIndex) {
+            lastIndex = randomIndex;
+            actualGame = orderGames.get(randomIndex);
+
+            if(lastIndex == randomIndex)
+                randomIndex = (int) (orderGames.size() * Math.random());
+
+            shuffledSentence = actualGame.get_ShuffleWords();
+            shuffledSentence = shuffledSentence.substring(0, shuffledSentence.length()-1);
+            rightSentence = actualGame.get_CorrectSentece();
+
+            Log.d("LAST INDEX", "" + lastIndex);
+            Log.d("RANDOM INDEX", "" + randomIndex);
+        }
 
         gridViewSentence.removeAllViews();
         gridViewAnswer.removeAllViews();
