@@ -1,12 +1,15 @@
 package com.example.android.gramalab.dialogs;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Dialog;
 import android.graphics.drawable.ColorDrawable;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 
 import com.example.android.gramalab.R;
 
@@ -15,6 +18,8 @@ import com.example.android.gramalab.R;
  */
 public class ViewDialog {
     private ImageView imageViewRes;
+    private ScrollView scrollView2;
+    private ImageView imageView4;
 
     public void showDialog(Activity activity){
         final Dialog dialog = new Dialog(activity);
@@ -30,6 +35,10 @@ public class ViewDialog {
                 dialog.dismiss();
             }
         });
+        ImageView imageView4 = (ImageView) dialog.findViewById(R.id.imageView4);
+        //ScrollView scrollView2 = (ScrollView) dialog.findViewById(R.id.scrollView2);
+        //scrollView2.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, imageView4.getHeight()));
+
 
         dialog.show();
 
